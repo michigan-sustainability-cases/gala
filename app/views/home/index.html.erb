@@ -1,0 +1,52 @@
+<%= render 'catalog/content_items/selection_params' %>
+<div id="catalog-app"></div>
+<%= javascript_pack_tag "home" %>
+<noscript>
+  <div class="pt-running-text pt-dark">
+    <h1>
+      <%= t 'catalog.open_access_learning_tools' %>
+    </h1>
+    <h2>
+      <%= t 'catalog.impactful_cases' %>
+    </h2>
+    <p>
+      <%= t 'catalog.find_a_case' %>
+    </p>
+    <h2>
+      <%= t 'catalog.innovative_teaching' %>
+    </h2>
+    <p>
+      <%= t 'catalog.improve_your_communication' %>
+    </p>
+    <h2>
+      <%= t 'catalog.inclusive_community' %>
+    </h2>
+    <p>
+      <%= t 'catalog.join_the_community' %>
+    </p>
+    <div class="pt-callout pt-intent-danger pt-icon-error">
+      Javascript is required to use Gala.
+    </div>
+    <h2>
+      <%= t 'cases.index.all_cases' %>
+    </h2>
+    <ul>
+      <% cases.each do |kase| %>
+        <li>
+          <%= link_to case_path kase do %>
+            <%= kase.title %>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</noscript>
+<% content_for :head do %>
+  <meta content="summary" name="twitter:card"/>
+  <link as="fetch" crossorigin="anonymous" href="<%= profile_path(format: :json) %>" rel="preload"></link>
+  <link as="fetch" crossorigin="anonymous" href="<%= cases_path(format: :json) %>" rel="preload"></link>
+  <link as="fetch" crossorigin="anonymous" href="<%= features_path(format: :json) %>" rel="preload"></link>
+  <link as="fetch" crossorigin="anonymous" href="<%= enrollments_path(format: :json) %>" rel="preload"></link>
+  <link as="fetch" crossorigin="anonymous" href="<%= tags_path(format: :json) %>" rel="preload"></link>
+  <link as="fetch" crossorigin="anonymous" href="<%= catalog_libraries_path(format: :json) %>" rel="preload"></link>
+<% end %>
