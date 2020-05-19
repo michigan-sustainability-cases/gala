@@ -28,7 +28,7 @@ Rails.application.routes.draw do
                                to: redirect('%{path}.%{format}')
   get ':locale/*path', locale: LOCALE_REGEX, to: redirect('%{path}')
 
-  root to: 'catalog#home'
+  root to: 'home#index'
 
   resources :activities, only: %i[update destroy]
 
