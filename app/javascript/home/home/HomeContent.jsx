@@ -122,7 +122,7 @@ const Container = styled.aside.attrs({ className: 'pt-dark' })`
   #community-content,
   #featured-content {
     height: 100px;
-    background-color: white;
+    background-color: #415e77;
   }
 `
 
