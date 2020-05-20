@@ -33,27 +33,23 @@ const CatalogToolbar = ({ history }: Props) => {
           groups={[
             [
               {
+                message: 'Home',
+                icon: 'home',
+                onClick: () => history.push('/')
+              },
+              {
                 message: 'catalog.catalog',
                 icon: 'home',
-                onClick: () => history.push('/'),
+                onClick: () => (window.location = '/catalog/home')
               },
-
               selecting || {
                 message: author
                   ? 'myCases.index.myCases'
                   : 'cases.new.createACase',
                 icon: 'annotation',
                 onClick: () => (window.location = '/my_cases'),
-                spotlightKey: 'my_cases',
-              },
-
-              selecting || {
-                message: instructor
-                  ? 'deployments.index.myDeployments'
-                  : 'deployments.index.deployACase',
-                icon: 'follower',
-                onClick: () => (window.location = '/deployments'),
-              },
+                spotlightKey: 'my_cases'
+              }
             ],
 
             [],

@@ -126,6 +126,7 @@ Rails.application.routes.draw do
   end
 
   namespace 'catalog' do
+    get 'catalog/home', to: "catalog#home"
     resource :content_items, only: %i[create] do
       resource :session, module: 'content_items', only: %i[destroy]
     end
