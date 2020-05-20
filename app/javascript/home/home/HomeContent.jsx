@@ -17,15 +17,15 @@ const HomeContent = () => (
     <div id="getting-started">
       <h4>Get Started</h4>
       <div id="getting-started-blocks">
-        <Block icon="" theme="red">
-          <button id="" class="pt-button pt-intent-primary">Find a Case</button>
-          <p>
+        <Block icon="" theme="red" id="findcase-block">
+          <button id="findcase-btn" class="pt-button pt-intent-primary">Find a Case</button>
+          <p class="btn-descriptor">
             Browse free, engaging modules for classrooms, organizations and public education.
           </p>
         </Block>
-        <Block icon="" theme="green">
-          <button id="" class="pt-button pt-intent-primary">Make a Case</button>
-          <p>
+        <Block icon="" theme="green" id="makecase-block">
+          <button id="makecase-btn" class="pt-button pt-intent-primary">Make a Case</button>
+          <p class="btn-descriptor">
             Author your own modules for educators, professionals, or the public.
           </p>
         </Block>
@@ -124,6 +124,32 @@ const Container = styled.aside.attrs({ className: 'pt-dark' })`
     height: 100px;
     background-color: #415e77;
   }
+
+  #findcase-btn,
+  #makecase-btn {
+    color: #423e59;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  #findcase-btn {
+    background-color: #feb294;
+  }
+  #makecase-btn {
+    background-color: #a0ebb6;
+  }
+
+  .btn-descriptor {
+    text-align: left;
+  }
+
+  #findcase-block {
+    border: 1px solid #feb294;
+  }
+
+  #makecase-block {
+    border: 1px solid #a0ebb6;
+  }
 `
 
 const intents = {
@@ -142,6 +168,9 @@ const Block = styled.div.attrs(({ theme, icon }) => ({
   className: `pt-callout ${intents[theme]} pt-icon-${icon}`,
 }))`
   padding: 1.25em;
+  text-align: center;
+  margin: 20px;
+
 
   &::before {
     top: 17px !important;
