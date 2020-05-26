@@ -19,8 +19,12 @@ const HomeContent = () => (
       <h4>Get Started</h4>
       <div id="getting-started-blocks">
         <Block icon="" theme="red" id="findcase-block">
-          <button id="findcase-btn" class="pt-button pt-intent-primary">Find a Case</button>
-          <p class="btn-descriptor">
+        <div className="pluginWrapper buttonWrapper">
+          <a className="button" id="findcase-btn" class="button pt-button pt-intent-primary" className="button" href='/catalog/search'>
+            Find a Case
+          </a>
+        </div>
+        <p class="btn-descriptor">
             Browse free, engaging modules for classrooms, organizations and public education.
           </p>
         </Block>

@@ -40,9 +40,33 @@ export function Catalog ({ intl }: { intl: IntlShape }) {
               <Container>
                 <CatalogToolbar />
                 <MaxWidthContainer>
-                    <ConnectedWindow>
-                      <Home />
-                    </ConnectedWindow>
+                  <Switch>
+                    <Route
+                      exact
+                      path="/"
+                      render={() => (
+                        <ConnectedWindow>
+                          <Home />
+                        </ConnectedWindow>
+                      )}
+                    />
+                    <Route
+                      path="/catalog/home"
+                      render={() => (
+                        <ConnectedWindow>
+                          <Home />
+                        </ConnectedWindow>
+                      )}
+                    />
+                    <Route
+                      path="/catalog/search"
+                      render={props => (
+                        <Window>
+                          <Results {...props} />
+                        </Window>
+                      )}
+                    />
+                  </Switch>
                 </MaxWidthContainer>
               </Container>
             </ContentItemSelectionContextProvider>
