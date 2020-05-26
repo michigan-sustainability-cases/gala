@@ -33,9 +33,14 @@ const CatalogToolbar = ({ history }: Props) => {
           groups={[
             [
               {
+                message: 'Home',
+                icon: 'home',
+                onClick: () => (window.location = '/')
+              },
+              {
                 message: 'catalog.catalog',
                 icon: 'home',
-                onClick: () => history.push('/'),
+                onClick: () => (window.location = '/catalog/home')
               },
 
               selecting || {
