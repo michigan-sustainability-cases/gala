@@ -9,6 +9,7 @@ import * as React from 'react'
 import styled from 'styled-components'
 import { FormattedMessage } from 'react-intl'
 
+
 const HomeContent = () => (
   <Container>
     <h1>
@@ -24,7 +25,11 @@ const HomeContent = () => (
           </p>
         </Block>
         <Block icon="" theme="green" id="makecase-block">
-          <button id="makecase-btn" class="pt-button pt-intent-primary">Make a Case</button>
+        <div className="pluginWrapper buttonWrapper">
+          <a className="button" id="makecase-btn" class="button pt-button pt-intent-primary" className="button" href='/my_cases'>
+            Make a Case
+          </a>
+        </div>
           <p class="btn-descriptor">
             Author your own modules for educators, professionals, or the public.
           </p>
