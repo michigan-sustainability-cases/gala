@@ -21,7 +21,7 @@ import { ReaderDataContextProvider } from 'home/readerData'
 
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
-import CatalogToolbar from 'home/CatalogToolbar'
+import HomeToolbar from 'home/HomeToolbar'
 import { MaxWidthContainer } from 'utility/styledComponents'
 import Home from 'home/home'
 import Results from 'home/search_results'
@@ -38,7 +38,7 @@ export function Catalog ({ intl }: { intl: IntlShape }) {
           <ReaderDataContextProvider>
             <ContentItemSelectionContextProvider>
               <Container>
-                <CatalogToolbar />
+                <HomeToolbar />
 
                 <MaxWidthContainer>
                   <Switch>

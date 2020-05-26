@@ -1,5 +1,5 @@
 /**
- * @providesModule CatalogToolbar
+ * @providesModule HomeToolbar
  * @flow
  */
 
@@ -21,7 +21,7 @@ import type { ContextRouter } from 'react-router-dom'
 
 type Props = {| ...ContextRouter |}
 
-const CatalogToolbar = ({ history }: Props) => {
+const HomeToolbar = ({ history }: Props) => {
   const {
     roles: { author, instructor },
   } = React.useContext(ReaderDataContext)
@@ -63,7 +63,7 @@ const CatalogToolbar = ({ history }: Props) => {
 }
 
 // $FlowFixMe
-export default withRouter(CatalogToolbar)
+export default withRouter(HomeToolbar)
 
 class SearchField extends React.Component<
   ContextRouter & { intl: IntlShape },
