@@ -11,7 +11,38 @@
  * It is generally better to create a new file per style scope.
  *
  *= require axioms
- *= require_tree .
+ *= require anchor_focus
+ *= require cards
+ *= require CaseOverview
+ *= require CaseReader
+ *= require CommentThread
+ *= require deployments
+ *= require devise
+ *= require Edgenote
+ *= require EdgenoteContents
+ *= require editorships
+ *= require flash
+ *= require footer
+ *= require forms
+ *= require home
+ *= require library
+ *= require locale
+ *= require main
+ *= require master_detail
+ *= require my_cases
+ *= require Narrative
+ *= require noscript
+ *= require  personas
+ *= require Podcast
+ *= require print
+ *= require readers
+ *= require reading_list
+ *= require Sidebar
+ *= require Statistics
+ *= require structure
+ *= require TableOfContents
+ *= require Toolbar
+ *= require unsupported_browser
  *= require_self
  *= stub print
  */
