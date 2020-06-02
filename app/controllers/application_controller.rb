@@ -25,6 +25,13 @@ class ApplicationController < ActionController::Base
     options
   end
 
+  def authenticate_active_admin_user!
+    unless current_user.is_admin?
+      flash[:alert] = "Unauthorized Access!"
+      redirect_to root_path
+    end
+  end
+
   private
 
   def user_not_authorized

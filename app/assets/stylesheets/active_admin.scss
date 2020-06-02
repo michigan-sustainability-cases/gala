@@ -1,0 +1,90 @@
+// SASS variable overrides must be declared before loading up Active Admin's styles.
+//
+// To view the variables that Active Admin provides, take a look at
+// `app/assets/stylesheets/active_admin/mixins/_variables.scss` in the
+// Active Admin source.
+//
+// For example, to change the sidebar width:
+// $sidebar-width: 242px;
+
+// Active Admin's got SASS!
+@import "active_admin/mixins";
+@import "active_admin/base";
+
+// Overriding any non-variable SASS must be done after the fact.
+// For example, to change the default status-tag color:
+//
+//   .status_tag { background: #6090DB; }
+
+$maizeColor: #ffcb05;
+$tanColor: #dcc699;
+$blueColor: #00274c;
+$altBlueColor: #40658f;
+$lightBlueColor: #8ec4f8;
+$lightGrayColor: #ececec;
+$medGrayColor: #babdc5;
+$darkGrayColor: #7f8c8d;
+$blueGrayColor: #455a64;
+$darkBlueColor: #1e2a33;
+
+$purpleColor: #684FA1;
+$mediumPurpleColor: #4d3488;
+$darkPurpleColor: #392171;
+$orangeColor: #E85F31;
+
+$panelBorder: $medGrayColor;
+$skinActiveColor: $darkPurpleColor;
+$bodyColor: white;
+$skinBlack: $purpleColor;
+$panelHeaderBck: $purpleColor;
+$skinBlackLight: $mediumPurpleColor;
+$textGray: white;
+$skinTextColor: $purpleColor;
+$skinTextActiveColor: white;
+$skinTextTable: $darkGrayColor;
+$skinHeaderBck: $purpleColor;
+
+@import "active_admin_flat_skin";
+
+#site_title a {
+  color: white !important;
+}
+
+.title_bar#title_bar {
+  background-color: $purpleColor;
+}
+
+.title_bar#title_bar h2 {
+  color: white;
+}
+
+html table.index_table td {
+  color: $purpleColor;
+}
+
+.header#header .header-item.tabs#tabs li a {
+  font-weight: bold;
+}
+
+html #header a, html #header a:link {
+  font-weight: bold;
+  font-size: 1.8rem;
+}
+
+.breadcrumb a, .breadcrumb a:link, .breadcrumb a:visited, .breadcrumb a:active {
+  color: white;
+  text-decoration: none;
+}
+
+.breadcrumb .breadcrumb_sep {
+  margin: 0 2px;
+  color: white;
+}
+
+.header#header .header-item.tabs#tabs li.current.has_nested .slided_down .current a {
+    color: $orangeColor !important;
+}
+
+html #footer p:first-child {
+  display: none !important;
+}

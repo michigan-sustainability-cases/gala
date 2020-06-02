@@ -9,6 +9,8 @@ LOCALE_REGEX ||= /#{LOCALES.map(&:to_s).join("|")}/.freeze
 REACT_ROUTER_LOCATION_REGEX ||= /[^.]+/.freeze
 
 Rails.application.routes.draw do
+
+  ActiveAdmin.routes(self)
   concern :has_statistics do
     resource :statistics, only: %i[show]
   end
@@ -32,32 +34,32 @@ Rails.application.routes.draw do
 
   resources :activities, only: %i[update destroy]
 
-  namespace :admin do
-    namespace :ahoy do
-      resources :events
-    end
-
-    resources :announcements
-    resources :answers
-    resources :cases
-    resources :comment_threads
-    resources :comments
-    resources :deployments
-    resources :editorships
-    resources :enrollments
-    resources :forums
-    resources :group_memberships
-    resources :groups
-    resources :questions
-    resources :quizzes
-    resources :readers
-    resources :reading_list_items
-    resources :reading_list_saves
-    resources :reading_lists
-    resources :submissions
-
-    root to: 'cases#index'
-  end
+  # namespace :admin do
+  #   namespace :ahoy do
+  #     resources :events
+  #   end
+  #
+  #   resources :announcements
+  #   resources :answers
+  #   resources :cases
+  #   resources :comment_threads
+  #   resources :comments
+  #   resources :deployments
+  #   resources :editorships
+  #   resources :enrollments
+  #   resources :forums
+  #   resources :group_memberships
+  #   resources :groups
+  #   resources :questions
+  #   resources :quizzes
+  #   resources :readers
+  #   resources :reading_list_items
+  #   resources :reading_list_saves
+  #   resources :reading_lists
+  #   resources :submissions
+  #
+  #   root to: 'cases#index'
+  # end
 
   resources :announcements, only: %i[index] do
     resource :dismissal, module: 'announcements', only: %i[create]
@@ -225,6 +227,6 @@ Rails.application.routes.draw do
     mount Sidekiq::Web => '/sidekiq'
   end
 
-  post 'admin/cases/:id/copy', to: "admin/cases#copy", as: 'copy_admin_case'
+  #post 'admin/cases/:id/copy', to: "admin/cases#copy", as: 'copy_admin_case'
 
 end

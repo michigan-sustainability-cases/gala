@@ -24,20 +24,6 @@ COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
 
 
 --
--- Name: hstore; Type: EXTENSION; Schema: -; Owner: -
---
-
-CREATE EXTENSION IF NOT EXISTS hstore WITH SCHEMA public;
-
-
---
--- Name: EXTENSION hstore; Type: COMMENT; Schema: -; Owner: -
---
-
-COMMENT ON EXTENSION hstore IS 'data type for storing sets of (key, value) pairs';
-
-
---
 -- Name: pg_stat_statements; Type: EXTENSION; Schema: -; Owner: -
 --
 
@@ -132,6 +118,42 @@ ALTER SEQUENCE public.action_mailbox_inbound_emails_id_seq OWNED BY public.actio
 
 
 --
+-- Name: active_admin_comments; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.active_admin_comments (
+    id bigint NOT NULL,
+    namespace character varying,
+    body text,
+    resource_type character varying,
+    resource_id bigint,
+    author_type character varying,
+    author_id bigint,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: active_admin_comments_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.active_admin_comments_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: active_admin_comments_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.active_admin_comments_id_seq OWNED BY public.active_admin_comments.id;
+
+
+--
 -- Name: active_storage_attachments; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -197,42 +219,6 @@ CREATE SEQUENCE public.active_storage_blobs_id_seq
 --
 
 ALTER SEQUENCE public.active_storage_blobs_id_seq OWNED BY public.active_storage_blobs.id;
-
-
---
--- Name: activities; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.activities (
-    id integer NOT NULL,
-    title_i18n public.hstore,
-    description_i18n public.hstore,
-    pdf_url_i18n public.hstore,
-    case_id integer,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL,
-    "position" integer
-);
-
-
---
--- Name: activities_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE public.activities_id_seq
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: activities_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE public.activities_id_seq OWNED BY public.activities.id;
 
 
 --
@@ -492,23 +478,29 @@ ALTER SEQUENCE public.case_elements_id_seq OWNED BY public.case_elements.id;
 
 CREATE TABLE public.cases (
     id integer NOT NULL,
-    published boolean DEFAULT false,
-    title_i18n public.hstore,
     slug text NOT NULL,
-    authors character varying[] DEFAULT '{}'::character varying[],
-    summary_i18n public.hstore,
-    tags text[] DEFAULT '{}'::text[],
-    narrative_i18n public.hstore,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    cover_url character varying,
-    publication_date date,
-    catalog_position integer DEFAULT 0 NOT NULL,
-    short_title text,
-    translators public.hstore DEFAULT ''::public.hstore NOT NULL,
-    kicker_i18n public.hstore,
-    dek_i18n public.hstore,
-    photo_credit text
+    photo_credit text,
+    commentable boolean,
+    published_at timestamp without time zone,
+    featured_at timestamp without time zone,
+    latitude double precision,
+    longitude double precision,
+    zoom double precision,
+    library_id bigint,
+    locale text NOT NULL,
+    translation_base_id bigint,
+    acknowledgements text DEFAULT ''::text,
+    audience text DEFAULT ''::text,
+    authors jsonb DEFAULT '""'::jsonb,
+    classroom_timeline text DEFAULT ''::text,
+    dek text DEFAULT ''::text,
+    kicker text DEFAULT ''::text,
+    learning_objectives jsonb DEFAULT '""'::jsonb,
+    summary text DEFAULT ''::text,
+    title text DEFAULT ''::text,
+    translators jsonb DEFAULT '""'::jsonb
 );
 
 
@@ -893,9 +885,10 @@ ALTER SEQUENCE public.group_memberships_id_seq OWNED BY public.group_memberships
 
 CREATE TABLE public.groups (
     id integer NOT NULL,
-    name_i18n public.hstore,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    context_id character varying,
+    name jsonb DEFAULT '""'::jsonb
 );
 
 
@@ -1663,6 +1656,13 @@ ALTER TABLE ONLY public.action_mailbox_inbound_emails ALTER COLUMN id SET DEFAUL
 
 
 --
+-- Name: active_admin_comments id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.active_admin_comments ALTER COLUMN id SET DEFAULT nextval('public.active_admin_comments_id_seq'::regclass);
+
+
+--
 -- Name: active_storage_attachments id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -1674,13 +1674,6 @@ ALTER TABLE ONLY public.active_storage_attachments ALTER COLUMN id SET DEFAULT n
 --
 
 ALTER TABLE ONLY public.active_storage_blobs ALTER COLUMN id SET DEFAULT nextval('public.active_storage_blobs_id_seq'::regclass);
-
-
---
--- Name: activities id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.activities ALTER COLUMN id SET DEFAULT nextval('public.activities_id_seq'::regclass);
 
 
 --
@@ -1957,11 +1950,46 @@ ALTER TABLE ONLY public.visits ALTER COLUMN id SET DEFAULT nextval('public.visit
 
 
 --
+-- Name: cases cases_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.cases
+    ADD CONSTRAINT cases_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: cases_search_index; Type: MATERIALIZED VIEW; Schema: public; Owner: -
+--
+
+CREATE MATERIALIZED VIEW public.cases_search_index AS
+ SELECT cases.id,
+    (((((((((setweight(to_tsvector(COALESCE(cases.kicker, ''::text)), 'A'::"char") || setweight(to_tsvector(COALESCE(cases.title, ''::text)), 'A'::"char")) || setweight(to_tsvector(COALESCE(cases.dek, ''::text)), 'A'::"char")) || setweight(to_tsvector(COALESCE(cases.summary, ''::text)), 'A'::"char")) || setweight(public.jsonb_path_to_tsvector(
+        CASE
+            WHEN (jsonb_typeof(cases.learning_objectives) <> 'array'::text) THEN '[]'::jsonb
+            ELSE cases.learning_objectives
+        END, '{}'::text[]), 'B'::"char")) || public.jsonb_path_to_tsvector(cases.authors, '{name}'::text[])) || setweight(to_tsvector(COALESCE(string_agg(pages.title, ' '::text), ''::text)), 'B'::"char")) || setweight(to_tsvector(COALESCE(string_agg(podcasts.title, ' '::text), ''::text)), 'B'::"char")) || to_tsvector(COALESCE(string_agg(podcasts.credits, ' '::text), ''::text))) || COALESCE(public.tsvector_agg(public.jsonb_path_to_tsvector((cards.raw_content -> 'blocks'::text), '{text}'::text[])), to_tsvector(''::text))) AS document
+   FROM (((public.cases
+     LEFT JOIN public.pages ON ((pages.case_id = cases.id)))
+     LEFT JOIN public.podcasts ON ((podcasts.case_id = cases.id)))
+     LEFT JOIN public.cards ON ((cards.case_id = cases.id)))
+  GROUP BY cases.id
+  WITH NO DATA;
+
+
+--
 -- Name: action_mailbox_inbound_emails action_mailbox_inbound_emails_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.action_mailbox_inbound_emails
     ADD CONSTRAINT action_mailbox_inbound_emails_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: active_admin_comments active_admin_comments_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.active_admin_comments
+    ADD CONSTRAINT active_admin_comments_pkey PRIMARY KEY (id);
 
 
 --
@@ -1978,14 +2006,6 @@ ALTER TABLE ONLY public.active_storage_attachments
 
 ALTER TABLE ONLY public.active_storage_blobs
     ADD CONSTRAINT active_storage_blobs_pkey PRIMARY KEY (id);
-
-
---
--- Name: activities activities_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.activities
-    ADD CONSTRAINT activities_pkey PRIMARY KEY (id);
 
 
 --
@@ -2050,14 +2070,6 @@ ALTER TABLE ONLY public.case_archives
 
 ALTER TABLE ONLY public.case_elements
     ADD CONSTRAINT case_elements_pkey PRIMARY KEY (id);
-
-
---
--- Name: cases cases_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.cases
-    ADD CONSTRAINT cases_pkey PRIMARY KEY (id);
 
 
 --
@@ -2324,6 +2336,27 @@ CREATE UNIQUE INDEX index_action_mailbox_inbound_emails_uniqueness ON public.act
 
 
 --
+-- Name: index_active_admin_comments_on_author_type_and_author_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_active_admin_comments_on_author_type_and_author_id ON public.active_admin_comments USING btree (author_type, author_id);
+
+
+--
+-- Name: index_active_admin_comments_on_namespace; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_active_admin_comments_on_namespace ON public.active_admin_comments USING btree (namespace);
+
+
+--
+-- Name: index_active_admin_comments_on_resource_type_and_resource_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_active_admin_comments_on_resource_type_and_resource_id ON public.active_admin_comments USING btree (resource_type, resource_id);
+
+
+--
 -- Name: index_active_storage_attachments_on_blob_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -2342,13 +2375,6 @@ CREATE UNIQUE INDEX index_active_storage_attachments_uniqueness ON public.active
 --
 
 CREATE UNIQUE INDEX index_active_storage_blobs_on_key ON public.active_storage_blobs USING btree (key);
-
-
---
--- Name: index_activities_on_case_id; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_activities_on_case_id ON public.activities USING btree (case_id);
 
 
 --
@@ -2485,6 +2511,20 @@ CREATE INDEX index_case_elements_on_element_type_and_element_id ON public.case_e
 
 
 --
+-- Name: index_cases_on_full_text; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_cases_on_full_text ON public.cases_search_index USING gin (document);
+
+
+--
+-- Name: index_cases_on_library_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_cases_on_library_id ON public.cases USING btree (library_id);
+
+
+--
 -- Name: index_cases_on_slug; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -2492,10 +2532,17 @@ CREATE UNIQUE INDEX index_cases_on_slug ON public.cases USING btree (slug);
 
 
 --
--- Name: index_cases_on_tags; Type: INDEX; Schema: public; Owner: -
+-- Name: index_cases_on_translation_base_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_cases_on_tags ON public.cases USING gin (tags);
+CREATE INDEX index_cases_on_translation_base_id ON public.cases USING btree (translation_base_id);
+
+
+--
+-- Name: index_cases_search_index; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_cases_search_index ON public.cases_search_index USING btree (id);
 
 
 --
@@ -2713,6 +2760,13 @@ CREATE INDEX index_group_memberships_on_group_id ON public.group_memberships USI
 --
 
 CREATE INDEX index_group_memberships_on_reader_id ON public.group_memberships USING btree (reader_id);
+
+
+--
+-- Name: index_groups_on_context_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_groups_on_context_id ON public.groups USING btree (context_id);
 
 
 --
@@ -3041,6 +3095,30 @@ ALTER TABLE ONLY public.answers
 
 
 --
+-- Name: enrollments fk_rails_0411d261ff; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.enrollments
+    ADD CONSTRAINT fk_rails_0411d261ff FOREIGN KEY (case_id) REFERENCES public.cases(id);
+
+
+--
+-- Name: cases fk_rails_04f7dcd821; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.cases
+    ADD CONSTRAINT fk_rails_04f7dcd821 FOREIGN KEY (translation_base_id) REFERENCES public.cases(id);
+
+
+--
+-- Name: case_archives fk_rails_0a47f951ed; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.case_archives
+    ADD CONSTRAINT fk_rails_0a47f951ed FOREIGN KEY (case_id) REFERENCES public.cases(id);
+
+
+--
 -- Name: locks fk_rails_18e2ec121a; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3097,11 +3175,35 @@ ALTER TABLE ONLY public.answers
 
 
 --
+-- Name: communities fk_rails_44a9601cb3; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.communities
+    ADD CONSTRAINT fk_rails_44a9601cb3 FOREIGN KEY (group_id) REFERENCES public.groups(id);
+
+
+--
 -- Name: answers fk_rails_4baf2a8f31; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.answers
     ADD CONSTRAINT fk_rails_4baf2a8f31 FOREIGN KEY (reader_id) REFERENCES public.readers(id);
+
+
+--
+-- Name: case_elements fk_rails_5bad37476a; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.case_elements
+    ADD CONSTRAINT fk_rails_5bad37476a FOREIGN KEY (case_id) REFERENCES public.cases(id);
+
+
+--
+-- Name: forums fk_rails_5f30e86c8a; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.forums
+    ADD CONSTRAINT fk_rails_5f30e86c8a FOREIGN KEY (case_id) REFERENCES public.cases(id);
 
 
 --
@@ -3118,6 +3220,14 @@ ALTER TABLE ONLY public.comment_threads
 
 ALTER TABLE ONLY public.editorships
     ADD CONSTRAINT fk_rails_65154bc221 FOREIGN KEY (editor_id) REFERENCES public.readers(id);
+
+
+--
+-- Name: locks fk_rails_6f28fa384a; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.locks
+    ADD CONSTRAINT fk_rails_6f28fa384a FOREIGN KEY (case_id) REFERENCES public.cases(id);
 
 
 --
@@ -3145,6 +3255,14 @@ ALTER TABLE ONLY public.spotlight_acknowledgements
 
 
 --
+-- Name: pages fk_rails_7d36788f66; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.pages
+    ADD CONSTRAINT fk_rails_7d36788f66 FOREIGN KEY (case_id) REFERENCES public.cases(id);
+
+
+--
 -- Name: reading_list_items fk_rails_7fe921b5b7; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3153,11 +3271,19 @@ ALTER TABLE ONLY public.reading_list_items
 
 
 --
--- Name: activities fk_rails_87f70881a5; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: cards fk_rails_8ed9cff919; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY public.activities
-    ADD CONSTRAINT fk_rails_87f70881a5 FOREIGN KEY (case_id) REFERENCES public.cases(id);
+ALTER TABLE ONLY public.cards
+    ADD CONSTRAINT fk_rails_8ed9cff919 FOREIGN KEY (case_id) REFERENCES public.cases(id);
+
+
+--
+-- Name: taggings fk_rails_8fbac4c978; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.taggings
+    ADD CONSTRAINT fk_rails_8fbac4c978 FOREIGN KEY (case_id) REFERENCES public.cases(id);
 
 
 --
@@ -3217,6 +3343,14 @@ ALTER TABLE ONLY public.invitations
 
 
 --
+-- Name: quizzes fk_rails_c22feaf615; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.quizzes
+    ADD CONSTRAINT fk_rails_c22feaf615 FOREIGN KEY (case_id) REFERENCES public.cases(id);
+
+
+--
 -- Name: active_storage_attachments fk_rails_c3b3935057; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3249,6 +3383,14 @@ ALTER TABLE ONLY public.invitations
 
 
 --
+-- Name: deployments fk_rails_c7885b3f7b; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.deployments
+    ADD CONSTRAINT fk_rails_c7885b3f7b FOREIGN KEY (case_id) REFERENCES public.cases(id);
+
+
+--
 -- Name: edgenotes fk_rails_cb36917c96; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3257,11 +3399,35 @@ ALTER TABLE ONLY public.edgenotes
 
 
 --
+-- Name: editorships fk_rails_cdd20e6a1b; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.editorships
+    ADD CONSTRAINT fk_rails_cdd20e6a1b FOREIGN KEY (case_id) REFERENCES public.cases(id);
+
+
+--
+-- Name: group_memberships fk_rails_d05778f88b; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.group_memberships
+    ADD CONSTRAINT fk_rails_d05778f88b FOREIGN KEY (group_id) REFERENCES public.groups(id);
+
+
+--
 -- Name: deployments fk_rails_d4d9e0a1aa; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.deployments
     ADD CONSTRAINT fk_rails_d4d9e0a1aa FOREIGN KEY (quiz_id) REFERENCES public.quizzes(id);
+
+
+--
+-- Name: podcasts fk_rails_e228f9f051; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.podcasts
+    ADD CONSTRAINT fk_rails_e228f9f051 FOREIGN KEY (case_id) REFERENCES public.cases(id);
 
 
 --
@@ -3278,6 +3444,22 @@ ALTER TABLE ONLY public.reading_list_saves
 
 ALTER TABLE ONLY public.submissions
     ADD CONSTRAINT fk_rails_ea35513632 FOREIGN KEY (reader_id) REFERENCES public.readers(id);
+
+
+--
+-- Name: reading_list_items fk_rails_efeaa2af93; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.reading_list_items
+    ADD CONSTRAINT fk_rails_efeaa2af93 FOREIGN KEY (case_id) REFERENCES public.cases(id);
+
+
+--
+-- Name: deployments fk_rails_f49860c54d; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.deployments
+    ADD CONSTRAINT fk_rails_f49860c54d FOREIGN KEY (group_id) REFERENCES public.groups(id);
 
 
 --
@@ -3412,6 +3594,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20190423203000'),
 ('20190424134031'),
 ('20190501151722'),
-('20190514190157');
+('20190514190157'),
+('20200602174721');
 
 

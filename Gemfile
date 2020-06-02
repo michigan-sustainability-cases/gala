@@ -67,8 +67,6 @@ gem 'sass-rails', '~> 5.0'
 gem 'webpacker', '>= 4.0.x'
 
 # Logging and Monitoring
-gem 'administrate'
-gem 'administrate-field-active_storage'
 gem 'awesome_print'
 gem 'barnes'
 gem 'lograge'
@@ -81,6 +79,11 @@ gem 'table_print'
 gem 'email_reply_parser'
 gem 'opengraph_parser'
 gem 'ruby-oembed'
+
+gem 'activeadmin', '~> 2.7.0'
+gem 'active_admin_flat_skin', github: 'ayann/active_admin_flat_skin'
+
+
 
 group :development do
   gem 'foreman'

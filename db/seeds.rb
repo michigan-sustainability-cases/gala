@@ -27,3 +27,4 @@ if defined? DEV_MOCK_AUTH_HASH
 end
 
 10.times { FactoryBot.create :case_with_elements, :published }
+AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
