@@ -33,16 +33,16 @@ $darkPurpleColor: #392171;
 $orangeColor: #E85F31;
 
 $panelBorder: $medGrayColor;
-$skinActiveColor: $darkPurpleColor;
+$skinActiveColor: black;
 $bodyColor: white;
-$skinBlack: $purpleColor;
-$panelHeaderBck: $purpleColor;
+$skinBlack: $lightGrayColor;
+$panelHeaderBck: $lightGrayColor;
 $skinBlackLight: $mediumPurpleColor;
-$textGray: white;
-$skinTextColor: $purpleColor;
-$skinTextActiveColor: white;
+$textGray: black; //white;
+$skinTextColor: $lightGrayColor;
+$skinTextActiveColor: $darkGrayColor;
 $skinTextTable: $darkGrayColor;
-$skinHeaderBck: $purpleColor;
+$skinHeaderBck: $lightGrayColor;
 
 @import "active_admin_flat_skin";
 
@@ -51,15 +51,19 @@ $skinHeaderBck: $purpleColor;
 }
 
 .title_bar#title_bar {
-  background-color: $purpleColor;
+  background-color: $lightGrayColor;
 }
 
 .title_bar#title_bar h2 {
-  color: white;
+  color: $darkGrayColor;
 }
 
 html table.index_table td {
-  color: $purpleColor;
+  color: $darkGrayColor;
+}
+
+#header #tabs {
+  height: 92%;
 }
 
 .header#header .header-item.tabs#tabs li a {
