@@ -18,48 +18,73 @@
 
 $maizeColor: #ffcb05;
 $tanColor: #dcc699;
+
 $blueColor: #00274c;
 $altBlueColor: #40658f;
 $lightBlueColor: #8ec4f8;
-$lightGrayColor: #ececec;
-$medGrayColor: #babdc5;
-$darkGrayColor: #7f8c8d;
 $blueGrayColor: #455a64;
 $darkBlueColor: #1e2a33;
+
+$gray1Color: #ececec;
+$gray2Color: #bdbdbd;
+$gray3Color: #7f7f7f;
+$gray4Color: #202020;
+
+$blackColor: #000;
+$black1Color: #1b1b1b;
+$black2Color: #0e0e0e;
 
 $purpleColor: #684FA1;
 $mediumPurpleColor: #4d3488;
 $darkPurpleColor: #392171;
 $orangeColor: #E85F31;
 
-$panelBorder: $medGrayColor;
-$skinActiveColor: black;
+$panelBorder: $gray3Color;
+$activeMenuItemBgColor: $gray4Color;
 $bodyColor: white;
-$skinBlack: $lightGrayColor;
-$panelHeaderBck: $lightGrayColor;
-$skinBlackLight: $mediumPurpleColor;
-$textGray: black; //white;
-$skinTextColor: $lightGrayColor;
-$skinTextActiveColor: $darkGrayColor;
-$skinTextTable: $darkGrayColor;
-$skinHeaderBck: $lightGrayColor;
+
+$btnBgColor: $black1Color;
+$btnHoverBgColor: $gray4Color;
+
+$formBtnBgColor: $black1Color;
+$formBtnColor: white;
+$formBtnHoverBgColor: $gray4Color;
+
+$skinBlack: $gray2Color;
+$panelHeaderBck: $gray4Color;
+$skinBlackLight: $gray3Color;
+$textGray: $black1Color; //white;
+
+$skinTextColor: $gray4Color;
+$skinTextActiveColor: $gray3Color;
+$skinTextTable: $gray3Color;
+$skinHeaderBck: $black1Color;
+$tableTextColor: $black1Color;
+
+$siteTitleColor: white;
+$siteTitleBgColor: $black2Color;
 
 @import "active_admin_flat_skin";
 
 #site_title a {
-  color: white !important;
+  color: $siteTitleColor !important;
+}
+
+#header.header .site_title {
+  background-color: $siteTitleBgColor;
 }
 
 .title_bar#title_bar {
-  background-color: $lightGrayColor;
+  background-color: $gray2Color;
 }
 
 .title_bar#title_bar h2 {
-  color: $darkGrayColor;
+  color: $black1Color;
 }
 
 html table.index_table td {
-  color: $darkGrayColor;
+  color: $tableTextColor;
+  font-size: 1.2em;
 }
 
 #header #tabs {
@@ -70,19 +95,26 @@ html table.index_table td {
   font-weight: bold;
 }
 
+#header.header #tabs.header-item.tabs li.current,
+#header.header #tabs.header-item.tabs li.current a {
+  background-color: $activeMenuItemBgColor;
+}
+
 html #header a, html #header a:link {
   font-weight: bold;
   font-size: 1.8rem;
 }
 
 .breadcrumb a, .breadcrumb a:link, .breadcrumb a:visited, .breadcrumb a:active {
-  color: white;
+  color: $gray4Color;
   text-decoration: none;
+  font-size: 1.2em;
 }
 
 .breadcrumb .breadcrumb_sep {
   margin: 0 2px;
-  color: white;
+  color: $gray4Color;
+  font-size: 1.2em;
 }
 
 .header#header .header-item.tabs#tabs li.current.has_nested .slided_down .current a {
@@ -91,4 +123,33 @@ html #header a, html #header a:link {
 
 html #footer p:first-child {
   display: none !important;
+}
+
+#diplay-filter {
+  background-color: $btnBgColor;
+  color: white;
+  border-color: $btnBgColor;
+}
+
+html #title_bar .action_items a {
+  background-color: $btnBgColor !important;
+  color: white !important;
+  border-color: $btnBgColor !important;
+}
+
+html #title_bar .action_items a:hover {
+  background-color: $btnHoverBgColor !important;
+}
+
+html .download_links a {
+  color: $blackColor;
+}
+
+html form input[type=submit], html a.button, html a.button:link, html a.button:visited {
+  background-color: $formBtnBgColor;
+  color: $formBtnColor
+}
+
+html form input[type=submit]:hover, html a.button:hover, html a.button:link:hover, html a.button:visited:hover {
+  background-color: $formBtnHoverBgColor !important;
 }
