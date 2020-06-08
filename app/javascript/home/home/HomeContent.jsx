@@ -8,6 +8,8 @@
 import * as React from 'react'
 import styled from 'styled-components'
 import { FormattedMessage } from 'react-intl'
+import Features from 'home/home/Features'
+
 
 
 const HomeContent = () => (
@@ -44,15 +46,14 @@ const HomeContent = () => (
       <div id="home-video"></div>
     </div>
     <div id="home-community">
-      <h4>Community</h4>
-      <div id="community-content">
-
+      <div id="community-content" class="content-area">
+        <h4>Community</h4>
       </div>
     </div>
     <div id="home-features">
-      <h4>Featured Cases</h4>
-      <div id="featured-content">
-
+      <div id="featured-content" class="content-area">
+        <h4>Featured Cases</h4>
+        <Features />
       </div>
     </div>
   </Container>
@@ -130,7 +131,6 @@ const Container = styled.aside.attrs({ className: 'pt-dark' })`
 
   #community-content,
   #featured-content {
-    height: 100px;
     background-color: #415e77;
   }
 
@@ -158,6 +158,10 @@ const Container = styled.aside.attrs({ className: 'pt-dark' })`
 
   #makecase-block {
     border: 1px solid #a0ebb6;
+  }
+
+  .content-area {
+    padding: 15px;
   }
 `
 

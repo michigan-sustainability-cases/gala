@@ -14,7 +14,7 @@ import { Consumer as ContentItemSelectionContextConsumer } from 'deployment/cont
 import Toolbar from 'utility/Toolbar'
 import { getSearchPath } from 'catalog/search_results/SearchForm'
 import TranslatedSpotlight from 'shared/spotlight/TranslatedSpotlight'
-import { ReaderDataContext } from 'catalog/readerData'
+import { ReaderDataContext } from 'home/readerData'
 
 import type { IntlShape } from 'react-intl'
 import type { ContextRouter } from 'react-router-dom'

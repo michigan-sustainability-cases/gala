@@ -9,8 +9,7 @@ import { FormattedMessage } from 'react-intl'
 
 import { CatalogDataContext } from 'home/catalogData'
 import { CatalogSection, SectionTitle } from 'home/shared'
-import { FeaturesCell as Cell } from 'home/home/shared'
-import TitleCard from 'shared/TitleCard'
+import TitleCard from 'home/home/TitleCard'
 
 type Props = { selecting: boolean }
 
@@ -28,10 +27,7 @@ function Featured ({ selecting }: Props) {
   const cases = six(slugs).map(slug => allCases[slug])
 
   return (
-    <CatalogSection solid>
-      <SectionTitle>
-        <FormattedMessage id="features.index.featuredCases" />
-      </SectionTitle>
+    <CatalogSection>
 
       <Grid>
         {cases.map((kase, i) => {
@@ -76,26 +72,14 @@ export const Grid = styled.ul`
   padding: 0;
   display: grid;
   grid-gap: 10px;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: minmax(300px, 1fr) auto;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(6, auto);
+`
 
-  @media (max-width: 1150px) {
-    grid-template-columns: repeat(2, auto);
-    grid-template-rows: repeat(2, minmax(200px, 1fr)) repeat(
-        2,
-        minmax(150px, 1fr)
-      );
-  }
-
-  @media (max-width: 900px) {
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: repeat(3, auto);
-  }
-
-  @media (max-width: 450px) {
-    grid-template-columns: 1fr;
-    grid-template-rows: repeat(6, auto);
-  }
+const Cell = styled.li`
+  background-color: #35536f;
+  border-radius: 2pt;
+  display: block;
 `
 
 const CaseBlock = ({
@@ -111,7 +95,6 @@ const CaseBlock = ({
   <Cell>
     <a href={url}>
       <TitleCard
-        authors={authors}
         coverUrl={coverUrl}
         kicker={kicker}
         photoCredit={photoCredit}
