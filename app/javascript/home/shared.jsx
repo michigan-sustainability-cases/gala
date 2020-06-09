@@ -22,18 +22,9 @@ export const SectionTitle = styled.h2`
 `
 
 export const CatalogSection = styled.section`
-  margin-bottom: 1em;
   overflow: hidden;
   padding: 10px;
   position: relative;
-
-  ${({ solid }) =>
-    solid &&
-    css`
-      background-color: #415e77;
-      border: 1px solid #2b4d67;
-      border-radius: 3px;
-    `};
 `
 
 export const CaseRow = styled.div`

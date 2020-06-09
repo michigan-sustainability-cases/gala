@@ -20,7 +20,6 @@ function TitleCard ({ coverUrl, kicker, photoCredit, title }: Props) {
   return (
     <Container>
       <Image src={coverUrl}>
-        {/* TODO: LabelForScreenReaders: Photo Credit: */}
         <PhotoCredit>{photoCredit}</PhotoCredit>
       </Image>
 
@@ -42,13 +41,11 @@ const grid =
 
 export const Container = styled.div`
   background-color: hsl(209, 83%, 90%);
-  display: grid;
   height: 100%;
   overflow: hidden;
   position: relative;
   width: 100%;
   border-radius: 3px 3px 0 0;
-  grid-template-columns: minmax(30%, 125px) auto;
   padding: 10px;
 `
 
@@ -63,7 +60,7 @@ export const Image = styled.div.attrs({ className: 'pt-dark' })`
   grid-area: image;
   justify-content: flex-end;
   min-height: 100px;
-  min-width: 100px;
+  min-width: 200px;
   position: relative;
   box-shadow: inset -1px 0 0 hsla(0, 0%, 0%, 0.2);
 `

@@ -12,10 +12,6 @@ import {
   Provider as ContentItemSelectionContextProvider,
   Consumer as ContentItemSelectionContextConsumer,
 } from 'deployment/contentItemSelectionContext'
-import {
-  NaturalResourcesGrid,
-  GlobalSystemsGrid,
-} from 'home/home/Categories'
 import { CatalogDataContextProvider } from 'home/catalogData'
 import { ReaderDataContextProvider } from 'home/readerData'
 
@@ -39,7 +35,6 @@ export function Catalog ({ intl }: { intl: IntlShape }) {
             <ContentItemSelectionContextProvider>
               <Container>
                 <HomeToolbar />
-
                 <MaxWidthContainer>
                   <Switch>
                     <Route
@@ -121,15 +116,6 @@ const ContentItemSelectionInProgressWindow = styled(Window)`
 
   @media (max-width: 700px) {
     grid-template: 'value-proposition' 'banner' 'main' auto / 100%;
-  }
-
-  & ${NaturalResourcesGrid}, & ${GlobalSystemsGrid} {
-    flex-direction: row;
-
-    & > *:not(:last-child) {
-      margin-right: 1em !important;
-      margin-bottom: 0 !important;
-    }
   }
 `
 

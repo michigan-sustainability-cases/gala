@@ -9,6 +9,7 @@ import * as React from 'react'
 import styled from 'styled-components'
 import { FormattedMessage } from 'react-intl'
 import Features from 'home/home/Features'
+import Community from 'home/home/Community'
 
 
 
@@ -48,6 +49,7 @@ const HomeContent = () => (
     <div id="home-community">
       <div id="community-content" class="content-area">
         <h4>Community</h4>
+        <Community />
       </div>
     </div>
     <div id="home-features">

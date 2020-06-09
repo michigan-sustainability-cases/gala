@@ -25,7 +25,7 @@ export function useReaderData () {
     Orchard.harvest('profile')
       .then(setReader)
       .catch(e => {
-        if (!(e instanceof OrchardError && e.status === 401)) throw e
+      //  if (!(e instanceof OrchardError && e.status === 401)) throw e
       })
       .then(() => setLoading(false))
   }, [])

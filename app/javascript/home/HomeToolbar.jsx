@@ -11,8 +11,8 @@ import { withRouter } from 'react-router-dom'
 import { InputGroup } from '@blueprintjs/core'
 
 import { Consumer as ContentItemSelectionContextConsumer } from 'deployment/contentItemSelectionContext'
-import Toolbar from 'utility/Toolbar'
-import { getSearchPath } from 'catalog/search_results/SearchForm'
+import Toolbar from 'home/Toolbar'
+import { getSearchPath } from 'home/search_results/SearchForm'
 import TranslatedSpotlight from 'shared/spotlight/TranslatedSpotlight'
 import { ReaderDataContext } from 'home/readerData'
 
@@ -33,22 +33,21 @@ const HomeToolbar = ({ history }: Props) => {
           groups={[
             [
               {
-                message: 'Home',
+                message: 'home.home',
                 icon: 'home',
                 onClick: () => history.push('/')
               },
               {
                 message: 'catalog.catalog',
                 icon: 'home',
-                onClick: () => (window.location = '/catalog/home')
+                onClick: () => (window.location = '/catalog/home'),
               },
               selecting || {
                 message: author
                   ? 'myCases.index.myCases'
                   : 'cases.new.createACase',
                 icon: 'annotation',
-                onClick: () => (window.location = '/my_cases'),
-                spotlightKey: 'my_cases'
+                onClick: () => (window.location = '/my_cases')
               }
             ],
 

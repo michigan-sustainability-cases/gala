@@ -28,36 +28,43 @@ function Featured ({ selecting }: Props) {
 
   return (
     <CatalogSection>
-      <Grid>
-        {cases.map((kase, i) => {
-          if (kase == null) return <Cell />
-
-          const {
-            coverUrl,
-            kicker,
-            links,
-            photoCredit,
-            slug,
-            title,
-          } = kase
-
-          return (
-            <CaseBlock
-              coverUrl={coverUrl}
-              key={slug}
-              kicker={kicker}
-              photoCredit={photoCredit}
-              title={title}
-              url={links.self}
-            />
-          )
-        })}
-      </Grid>
+      <PostContainer>
+        <PostTitle>Blog Post Title</PostTitle>
+        <PostBody>Blog Post Body</PostBody>
+      </PostContainer>
+      <PostContainer>
+        <PostTitle>Blog Post Title</PostTitle>
+        <PostBody>Blog Post Body</PostBody>
+      </PostContainer>
+      <PostContainer>
+        <PostTitle>Blog Post Title</PostTitle>
+        <PostBody>Blog Post Body</PostBody>
+      </PostContainer>
+      <PostContainer>
+        <PostTitle>Blog Post Title</PostTitle>
+        <PostBody>Blog Post Body</PostBody>
+      </PostContainer>
     </CatalogSection>
   )
 }
 
 export default Featured
+
+export const PostContainer = styled.div`
+  width: 100%;
+  padding: 10px;
+  border-top: 1px solid white;
+`
+
+export const PostTitle = styled.div`
+  width: 100%;
+  padding: 10px;
+`
+
+export const PostBody = styled.div`
+  width: 100%;
+  padding: 10px;
+`
 
 function six (arr) {
   const paddedArr = arr.length < 6 ? [...arr, ...Array(6)] : arr

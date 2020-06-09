@@ -1,4 +1,6 @@
 en:
+  home:
+    home: Home
   activemodel:
     attributes:
       confirm_deletion_form:
