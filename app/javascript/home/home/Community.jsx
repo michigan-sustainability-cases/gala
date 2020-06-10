@@ -29,18 +29,22 @@ function Featured ({ selecting }: Props) {
   return (
     <CatalogSection>
       <PostContainer>
+        <PostImage></PostImage>
         <PostTitle>Blog Post Title</PostTitle>
         <PostBody>Blog Post Body</PostBody>
       </PostContainer>
       <PostContainer>
+        <PostImage></PostImage>
         <PostTitle>Blog Post Title</PostTitle>
         <PostBody>Blog Post Body</PostBody>
       </PostContainer>
       <PostContainer>
+        <PostImage></PostImage>
         <PostTitle>Blog Post Title</PostTitle>
         <PostBody>Blog Post Body</PostBody>
       </PostContainer>
       <PostContainer>
+        <PostImage></PostImage>
         <PostTitle>Blog Post Title</PostTitle>
         <PostBody>Blog Post Body</PostBody>
       </PostContainer>
@@ -54,6 +58,12 @@ export const PostContainer = styled.div`
   width: 100%;
   padding: 10px;
   border-top: 1px solid white;
+`
+
+export const PostImage = styled.div`
+  width: 30px;
+  height: 30px;
+  background-color: #ddd;
 `
 
 export const PostTitle = styled.div`

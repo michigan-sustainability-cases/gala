@@ -23,5 +23,8 @@ module Orchard
     config.active_record.schema_format = :sql
 
     config.middleware.insert_after ActionDispatch::Static, Rack::Deflater
+
+    config.app_generators.scaffold_controller = :scaffold_controller
+    config.generators.system_tests = nil
   end
 end

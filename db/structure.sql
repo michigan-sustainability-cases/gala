@@ -371,6 +371,73 @@ ALTER SEQUENCE public.authentication_strategies_id_seq OWNED BY public.authentic
 
 
 --
+-- Name: blog_categories; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.blog_categories (
+    id bigint NOT NULL,
+    name character varying,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: blog_categories_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.blog_categories_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: blog_categories_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.blog_categories_id_seq OWNED BY public.blog_categories.id;
+
+
+--
+-- Name: blog_posts; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.blog_posts (
+    id bigint NOT NULL,
+    title character varying,
+    body text,
+    cover_photo character varying,
+    author_id bigint,
+    blog_category_id bigint,
+    featured boolean,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: blog_posts_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.blog_posts_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: blog_posts_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.blog_posts_id_seq OWNED BY public.blog_posts.id;
+
+
+--
 -- Name: cards; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1705,6 +1772,20 @@ ALTER TABLE ONLY public.authentication_strategies ALTER COLUMN id SET DEFAULT ne
 
 
 --
+-- Name: blog_categories id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.blog_categories ALTER COLUMN id SET DEFAULT nextval('public.blog_categories_id_seq'::regclass);
+
+
+--
+-- Name: blog_posts id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.blog_posts ALTER COLUMN id SET DEFAULT nextval('public.blog_posts_id_seq'::regclass);
+
+
+--
 -- Name: cards id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -2046,6 +2127,22 @@ ALTER TABLE ONLY public.ar_internal_metadata
 
 ALTER TABLE ONLY public.authentication_strategies
     ADD CONSTRAINT authentication_strategies_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: blog_categories blog_categories_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.blog_categories
+    ADD CONSTRAINT blog_categories_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: blog_posts blog_posts_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.blog_posts
+    ADD CONSTRAINT blog_posts_pkey PRIMARY KEY (id);
 
 
 --
@@ -2459,6 +2556,13 @@ CREATE INDEX index_authentication_strategies_on_reader_id ON public.authenticati
 --
 
 CREATE INDEX index_authentication_strategies_on_uid ON public.authentication_strategies USING btree (uid) WHERE ((provider)::text = 'lti'::text);
+
+
+--
+-- Name: index_blog_posts_on_blog_category_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_blog_posts_on_blog_category_id ON public.blog_posts USING btree (blog_category_id);
 
 
 --
@@ -3595,6 +3699,8 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20190424134031'),
 ('20190501151722'),
 ('20190514190157'),
-('20200602174721');
+('20200602174721'),
+('20200610193624'),
+('20200610194554');
 
 

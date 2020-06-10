@@ -153,3 +153,15 @@ html form input[type=submit], html a.button, html a.button:link, html a.button:v
 html form input[type=submit]:hover, html a.button:hover, html a.button:link:hover, html a.button:visited:hover {
   background-color: $formBtnHoverBgColor !important;
 }
+
+.header#header .header-item.tabs#tabs li.current.has_nested .slided_down .current a {
+  color: white !important;
+}
+
+.header#header .header-item.tabs#tabs li.has_nested ul.slided_down li:hover a {
+  color: $bodyColor !important;
+}
+
+.panel h3, .sidebar_section.panel h3 {
+  color: $bodyColor !important;
+}

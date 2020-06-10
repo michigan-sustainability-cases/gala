@@ -10,6 +10,8 @@ REACT_ROUTER_LOCATION_REGEX ||= /[^.]+/.freeze
 
 Rails.application.routes.draw do
 
+  resources :blog_posts
+  resources :blog_categories
   ActiveAdmin.routes(self)
   concern :has_statistics do
     resource :statistics, only: %i[show]

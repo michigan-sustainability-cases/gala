@@ -82,7 +82,7 @@ gem 'ruby-oembed'
 
 gem 'activeadmin', '~> 2.7.0'
 gem 'active_admin_flat_skin', github: 'ayann/active_admin_flat_skin'
-
+gem 'seed-fu', '~> 2.3'
 
 
 group :development do
