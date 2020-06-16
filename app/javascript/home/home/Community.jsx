@@ -29,24 +29,52 @@ function Featured ({ selecting }: Props) {
   return (
     <CatalogSection>
       <PostContainer>
-        <PostImage></PostImage>
-        <PostTitle>Blog Post Title</PostTitle>
-        <PostBody>Blog Post Body</PostBody>
+        <PostImage>&nbsp;</PostImage>
+        <PostText>
+          <PostTitle>Blog Post Title</PostTitle>
+          <PostBody>
+            Contrary to popular belief, Lorem Ipsum is not simply random text. It
+            has roots in a piece of classical Latin literature from 45 BC, making
+            it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney
+            College in Virginia, looked up one of the more obscure Latin words,
+          </PostBody>
+        </PostText>
+      </PostContainer>
+      <PostContainer>
+        <PostImage>Image Placeholder</PostImage>
+        <PostText>
+          <PostTitle>Blog Post Title</PostTitle>
+          <PostBody>
+            Contrary to popular belief, Lorem Ipsum is not simply random text. It
+            has roots in a piece of classical Latin literature from 45 BC, making
+            it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney
+            College in Virginia, looked up one of the more obscure Latin words,
+          </PostBody>
+        </PostText>
       </PostContainer>
       <PostContainer>
         <PostImage></PostImage>
-        <PostTitle>Blog Post Title</PostTitle>
-        <PostBody>Blog Post Body</PostBody>
+        <PostText>
+          <PostTitle>Blog Post Title</PostTitle>
+          <PostBody>
+            Contrary to popular belief, Lorem Ipsum is not simply random text. It
+            has roots in a piece of classical Latin literature from 45 BC, making
+            it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney
+            College in Virginia, looked up one of the more obscure Latin words,
+          </PostBody>
+        </PostText>
       </PostContainer>
       <PostContainer>
         <PostImage></PostImage>
-        <PostTitle>Blog Post Title</PostTitle>
-        <PostBody>Blog Post Body</PostBody>
-      </PostContainer>
-      <PostContainer>
-        <PostImage></PostImage>
-        <PostTitle>Blog Post Title</PostTitle>
-        <PostBody>Blog Post Body</PostBody>
+        <PostText>
+          <PostTitle>Blog Post Title</PostTitle>
+          <PostBody>
+            Contrary to popular belief, Lorem Ipsum is not simply random text. It
+            has roots in a piece of classical Latin literature from 45 BC, making
+            it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney
+            College in Virginia, looked up one of the more obscure Latin words,
+          </PostBody>
+        </PostText>
       </PostContainer>
     </CatalogSection>
   )
@@ -55,24 +83,27 @@ function Featured ({ selecting }: Props) {
 export default Featured
 
 export const PostContainer = styled.div`
-  width: 100%;
   padding: 10px;
-  border-top: 1px solid white;
+  display: flex;
+  border: 1px solid black;
+`
+
+export const PostText = styled.div`
+  padding: 10px;
 `
 
 export const PostImage = styled.div`
-  width: 30px;
-  height: 30px;
+  width: 400px;
+  margin: 0px;
   background-color: #ddd;
 `
 
 export const PostTitle = styled.div`
-  width: 100%;
   padding: 10px;
+  font-weight: bold;
 `
 
 export const PostBody = styled.div`
-  width: 100%;
   padding: 10px;
 `
 
