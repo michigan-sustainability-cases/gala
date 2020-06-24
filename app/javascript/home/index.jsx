@@ -14,6 +14,7 @@ import {
 } from 'deployment/contentItemSelectionContext'
 import { CatalogDataContextProvider } from 'home/catalogData'
 import { ReaderDataContextProvider } from 'home/readerData'
+import { BlogDataContextProvider } from 'home/blogData'
 
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
@@ -32,33 +33,35 @@ export function Catalog ({ intl }: { intl: IntlShape }) {
       <Router basename={basename}>
         <CatalogDataContextProvider>
           <ReaderDataContextProvider>
-            <ContentItemSelectionContextProvider>
-              <Container>
-                <HomeToolbar />
-                <MaxWidthContainer>
-                  <Switch>
-                    <Route
-                      exact
-                      path="/"
-                      render={() => (
-                        <ConnectedWindow>
-                          <Home />
-                        </ConnectedWindow>
-                      )}
-                    />
+            <BlogDataContextProvider>
+              <ContentItemSelectionContextProvider>
+                <Container>
+                  <HomeToolbar />
+                  <MaxWidthContainer>
+                    <Switch>
+                      <Route
+                        exact
+                        path="/"
+                        render={() => (
+                          <ConnectedWindow>
+                            <Home />
+                          </ConnectedWindow>
+                        )}
+                      />
 
-                    <Route
-                      path="/catalog/"
-                      render={props => (
-                        <Window>
-                          <Results {...props} />
-                        </Window>
-                      )}
-                    />
-                  </Switch>
-                </MaxWidthContainer>
-              </Container>
-            </ContentItemSelectionContextProvider>
+                      <Route
+                        path="/"
+                        render={props => (
+                          <Window>
+                            <Results {...props} />
+                          </Window>
+                        )}
+                      />
+                    </Switch>
+                  </MaxWidthContainer>
+                </Container>
+              </ContentItemSelectionContextProvider>
+            </BlogDataContextProvider>
           </ReaderDataContextProvider>
         </CatalogDataContextProvider>
       </Router>

@@ -23,21 +23,21 @@ const HomeContent = () => (
       <div id="getting-started-blocks">
         <Block icon="" theme="red" id="findcase-block">
         <div className="pluginWrapper buttonWrapper">
-          <a className="button" id="findcase-btn" class="button pt-button pt-intent-primary" className="button" href='/catalog/search'>
+          <a className="button pt-button pt-intent-primary" id="findcase-btn" href='/catalog/search'>
             Find a Case
           </a>
         </div>
-        <p class="btn-descriptor">
+        <p className="btn-descriptor">
             Browse free, engaging modules for classrooms, organizations and public education.
           </p>
         </Block>
         <Block icon="" theme="green" id="makecase-block">
         <div className="pluginWrapper buttonWrapper">
-          <a className="button" id="makecase-btn" class="button pt-button pt-intent-primary" className="button" href='/my_cases'>
+          <a className="button pt-button pt-intent-primary" id="makecase-btn" href='/my_cases'>
             Make a Case
           </a>
         </div>
-          <p class="btn-descriptor">
+          <p className="btn-descriptor">
             Author your own modules for educators, professionals, or the public.
           </p>
         </Block>
@@ -47,13 +47,13 @@ const HomeContent = () => (
       <div id="home-video"></div>
     </div>
     <div id="home-community">
-      <div id="community-content" class="content-area">
+      <div id="community-content" className="content-area">
         <h4>Community</h4>
         <Community />
       </div>
     </div>
     <div id="home-features">
-      <div id="featured-content" class="content-area">
+      <div id="featured-content" className="content-area">
         <h4>Featured Cases</h4>
         <Features />
       </div>

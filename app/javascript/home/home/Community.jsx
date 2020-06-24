@@ -6,94 +6,69 @@
 import React from 'react'
 import styled from 'styled-components'
 import { FormattedMessage } from 'react-intl'
+import Truncate from 'react-truncate'
 
-import { CatalogDataContext } from 'home/catalogData'
+import { BlogDataContext } from 'home/blogData'
 import { CatalogSection, SectionTitle } from 'home/shared'
 import TitleCard from 'home/home/TitleCard'
 
-type Props = { selecting: boolean }
-
-function Featured ({ selecting }: Props) {
-  const [{ cases: allCases, enrollments, features }] = React.useContext(
-    CatalogDataContext
+function Posts () {
+  const [{ blogPosts}] = React.useContext(
+    BlogDataContext
   )
 
-  let slugs = features
-  if (selecting) {
-    const enrolledSlugs = enrollments.map(e => e.caseSlug)
-    slugs = [...enrolledSlugs, ...slugs]
-  }
-
-  const cases = six(slugs).map(slug => allCases[slug])
 
   return (
     <CatalogSection>
-      <PostContainer>
-        <PostImage>&nbsp;</PostImage>
-        <PostText>
-          <PostTitle>Blog Post Title</PostTitle>
-          <PostBody>
-            Contrary to popular belief, Lorem Ipsum is not simply random text. It
-            has roots in a piece of classical Latin literature from 45 BC, making
-            it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney
-            College in Virginia, looked up one of the more obscure Latin words,
-          </PostBody>
-        </PostText>
-      </PostContainer>
-      <PostContainer>
-        <PostImage>Image Placeholder</PostImage>
-        <PostText>
-          <PostTitle>Blog Post Title</PostTitle>
-          <PostBody>
-            Contrary to popular belief, Lorem Ipsum is not simply random text. It
-            has roots in a piece of classical Latin literature from 45 BC, making
-            it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney
-            College in Virginia, looked up one of the more obscure Latin words,
-          </PostBody>
-        </PostText>
-      </PostContainer>
-      <PostContainer>
-        <PostImage></PostImage>
-        <PostText>
-          <PostTitle>Blog Post Title</PostTitle>
-          <PostBody>
-            Contrary to popular belief, Lorem Ipsum is not simply random text. It
-            has roots in a piece of classical Latin literature from 45 BC, making
-            it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney
-            College in Virginia, looked up one of the more obscure Latin words,
-          </PostBody>
-        </PostText>
-      </PostContainer>
-      <PostContainer>
-        <PostImage></PostImage>
-        <PostText>
-          <PostTitle>Blog Post Title</PostTitle>
-          <PostBody>
-            Contrary to popular belief, Lorem Ipsum is not simply random text. It
-            has roots in a piece of classical Latin literature from 45 BC, making
-            it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney
-            College in Virginia, looked up one of the more obscure Latin words,
-          </PostBody>
-        </PostText>
-      </PostContainer>
+      <Grid>
+        {blogPosts.map((blogPost, i) => {
+          if (blogPost == null) return <Cell key={i} />
+
+          const {
+            title,
+            body,
+            featured
+          } = blogPost
+
+          return (
+            <PostContainer>
+              <PostImage><InnerPostImage></InnerPostImage></PostImage>
+              <PostText>
+                <PostTitle>{title}</PostTitle>
+                <PostBody>
+                  <Truncate lines={3} ellipsis={<span>...
+                    <br/><a href='/link/to/article'>Read more</a></span>}>
+                    {body}
+                  </Truncate>
+                </PostBody>
+              </PostText>
+            </PostContainer>
+          )
+        })}
+      </Grid>
     </CatalogSection>
   )
 }
 
-export default Featured
+export default Posts
 
 export const PostContainer = styled.div`
   padding: 10px;
   display: flex;
-  border: 1px solid black;
 `
 
 export const PostText = styled.div`
-  padding: 10px;
+  padding-right: 10px;
+  border-top: 1px solid white;
+  margin-left: 20px;
 `
 
 export const PostImage = styled.div`
-  width: 400px;
+  margin-top: 20px;
+`
+export const InnerPostImage = styled.div`
+  width: 150px;
+  height: 150px;
   margin: 0px;
   background-color: #ddd;
 `
@@ -117,7 +92,7 @@ export const Grid = styled.ul`
   padding: 0;
   display: grid;
   grid-gap: 10px;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(1, 1fr);
   grid-template-rows: repeat(6, auto);
 `
 
