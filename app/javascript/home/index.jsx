@@ -1,5 +1,5 @@
 /**
- * @providesModule Catalog
+ * @providesModule HomePage
  * @flow
  */
 
@@ -14,7 +14,7 @@ import {
 } from 'deployment/contentItemSelectionContext'
 import { CatalogDataContextProvider } from 'home/catalogData'
 import { ReaderDataContextProvider } from 'home/readerData'
-import { BlogDataContextProvider } from 'home/blogData'
+import { BlogDataContextProvider } from 'blog/blogData'
 
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
@@ -25,7 +25,7 @@ import Results from 'home/search_results'
 
 import type { IntlShape } from 'react-intl'
 
-export function Catalog ({ intl }: { intl: IntlShape }) {
+export function HomePage ({ intl }: { intl: IntlShape }) {
   const basename = window.location.pathname.match(/^(\/\w{2}(-\w{2})?)?\//)[0]
 
   return (
@@ -69,7 +69,7 @@ export function Catalog ({ intl }: { intl: IntlShape }) {
   )
 }
 
-export default injectIntl(Catalog)
+export default injectIntl(HomePage)
 
 const Container = styled.div`
   min-height: 100%;

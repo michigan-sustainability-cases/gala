@@ -1,3 +1,3 @@
 class BlogPostSerializer < ApplicationSerializer
-  attributes :id
+  attributes :id, :title, :body, :featured
 end

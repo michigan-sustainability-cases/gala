@@ -1,4 +1,17 @@
-<p id="notice"><%= notice %></p>
+<div lang="<%= case_locale %>" id="container">
+</div>
 
-<%= link_to 'Edit', edit_blog_post_path(@blog_post) %> |
-<%= link_to 'Back', blog_posts_path %>
+<%=javascript_tag do %>
+  window.postData = <%=
+  raw ActiveModel::Serializer.for(
+    @blog_post
+  )
+    .to_json
+  %>
+<% end %>
+
+<%=javascript_pack_tag "blog_post"%>
+
+<%= content_for :head do %>
+
+<% end %>

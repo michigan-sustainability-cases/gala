@@ -8,7 +8,7 @@ import styled from 'styled-components'
 import { FormattedMessage } from 'react-intl'
 import Truncate from 'react-truncate'
 
-import { BlogDataContext } from 'home/blogData'
+import { BlogDataContext } from 'blog/blogData'
 import { CatalogSection, SectionTitle } from 'home/shared'
 import TitleCard from 'home/home/TitleCard'
 
@@ -25,10 +25,13 @@ function Posts () {
           if (blogPost == null) return <Cell key={i} />
 
           const {
+            id,
             title,
             body,
             featured
           } = blogPost
+
+          let url = `/blog_posts/${id}`;
 
           return (
             <PostContainer>
@@ -37,7 +40,7 @@ function Posts () {
                 <PostTitle>{title}</PostTitle>
                 <PostBody>
                   <Truncate lines={3} ellipsis={<span>...
-                    <br/><a href='/link/to/article'>Read more</a></span>}>
+                    <br/><a href={url}>Read more</a></span>}>
                     {body}
                   </Truncate>
                 </PostBody>
