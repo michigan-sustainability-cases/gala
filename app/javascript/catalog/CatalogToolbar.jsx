@@ -39,7 +39,7 @@ const CatalogToolbar = ({ history }: Props) => {
               },
               {
                 message: 'catalog.catalog',
-                icon: 'home',
+                icon: 'book',
                 onClick: () => (window.location = '/catalog/home')
               },
 

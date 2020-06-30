@@ -65,7 +65,7 @@ function StatusBar ({
             pathname === '/'
               ? {
                   message: 'catalog.catalog',
-                  icon: 'home',
+                  icon: 'book',
                   onClick: () =>
                     (window.location = window.location.pathname.replace(
                       /cases.*/,
