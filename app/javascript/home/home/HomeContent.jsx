@@ -10,6 +10,7 @@ import styled from 'styled-components'
 import { FormattedMessage } from 'react-intl'
 import Features from 'home/home/Features'
 import Community from 'home/home/Community'
+import YoutubePlayer from 'react-youtube-player'
 
 
 
@@ -44,7 +45,18 @@ const HomeContent = () => (
       </div>
     </div>
     <div id="home-video-container">
-      <div id="home-video"></div>
+      <div id="home-video">
+      <YoutubePlayer
+          videoId='Y8JZkCcqOZo'
+          playbackState='unstarted'
+          configuration={
+              {
+                  showinfo: 0,
+                  controls: 0
+              }
+          }
+      />
+      </div>
     </div>
     <div id="home-community">
       <div id="community-content" className="content-area">
@@ -126,8 +138,8 @@ const Container = styled.aside.attrs({ className: 'pt-dark' })`
   }
 
   #home-video {
-    height: 200px;
-    width: 300px;
+    height: 300px;
+    width: 450px;
     background-color: grey;
   }
 
