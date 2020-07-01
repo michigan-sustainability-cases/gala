@@ -1,0 +1,24 @@
+<%= semantic_form_for [:admin, @blog_post], builder: ActiveAdmin::FormBuilder do |f| %>
+  <div class="form-group">
+    <%= f.input :title  %>
+  </div>
+  <div class="form-group">
+    <%= f.input :blog_category  %>
+  </div>
+  <div class="form-group">
+    <%= f.input :author  %>
+  </div>
+  <div class="form-group">
+    <%= f.input :body  %>
+  </div>
+  <div class="form-group">
+    <%= f.input :featured  %>
+  </div>
+  <div class="form-group">
+    <label>Logo:</label>
+    <%= f.file_field :cover_photo  %>
+  </div>
+  <div class="form-group">
+    <%= f.actions %>
+  </div>
+<% end %>

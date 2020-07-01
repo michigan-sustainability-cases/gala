@@ -414,7 +414,8 @@ CREATE TABLE public.blog_posts (
     blog_category_id bigint,
     featured boolean,
     created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL
+    updated_at timestamp(6) without time zone NOT NULL,
+    crop_settings json
 );
 
 
@@ -3701,6 +3702,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20190514190157'),
 ('20200602174721'),
 ('20200610193624'),
-('20200610194554');
+('20200610194554'),
+('20200701190422');
 
 

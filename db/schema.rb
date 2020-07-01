@@ -10,10 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_14_190157) do
+ActiveRecord::Schema.define(version: 2020_07_01_190422) do
 
   # These are extensions that must be enabled in order to support this database
-  enable_extension "hstore"
   enable_extension "pg_stat_statements"
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -25,6 +24,20 @@ ActiveRecord::Schema.define(version: 2019_05_14_190157) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["message_id", "message_checksum"], name: "index_action_mailbox_inbound_emails_uniqueness", unique: true
+  end
+
+  create_table "active_admin_comments", force: :cascade do |t|
+    t.string "namespace"
+    t.text "body"
+    t.string "resource_type"
+    t.bigint "resource_id"
+    t.string "author_type"
+    t.bigint "author_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id"
+    t.index ["namespace"], name: "index_active_admin_comments_on_namespace"
+    t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id"
   end
 
   create_table "active_storage_attachments", force: :cascade do |t|
@@ -46,17 +59,6 @@ ActiveRecord::Schema.define(version: 2019_05_14_190157) do
     t.string "checksum", null: false
     t.datetime "created_at", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
-  end
-
-  create_table "activities", id: :serial, force: :cascade do |t|
-    t.hstore "title_i18n"
-    t.hstore "description_i18n"
-    t.hstore "pdf_url_i18n"
-    t.integer "case_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "position"
-    t.index ["case_id"], name: "index_activities_on_case_id"
   end
 
   create_table "ahoy_events", id: :serial, force: :cascade do |t|
@@ -108,6 +110,25 @@ ActiveRecord::Schema.define(version: 2019_05_14_190157) do
     t.index ["uid"], name: "index_authentication_strategies_on_uid", where: "((provider)::text = 'lti'::text)"
   end
 
+  create_table "blog_categories", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "blog_posts", force: :cascade do |t|
+    t.string "title"
+    t.text "body"
+    t.string "cover_photo"
+    t.bigint "author_id"
+    t.bigint "blog_category_id"
+    t.boolean "featured"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.json "crop_settings"
+    t.index ["blog_category_id"], name: "index_blog_posts_on_blog_category_id"
+  end
+
   create_table "cards", id: :serial, force: :cascade do |t|
     t.integer "position"
     t.integer "page_id"
@@ -143,25 +164,32 @@ ActiveRecord::Schema.define(version: 2019_05_14_190157) do
   end
 
   create_table "cases", id: :serial, force: :cascade do |t|
-    t.boolean "published", default: false
-    t.hstore "title_i18n"
     t.text "slug", null: false
-    t.string "authors", default: [], array: true
-    t.hstore "summary_i18n"
-    t.text "tags", default: [], array: true
-    t.hstore "narrative_i18n"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "cover_url"
-    t.date "publication_date"
-    t.integer "catalog_position", default: 0, null: false
-    t.text "short_title"
-    t.hstore "translators", default: {}, null: false
-    t.hstore "kicker_i18n"
-    t.hstore "dek_i18n"
     t.text "photo_credit"
+    t.boolean "commentable"
+    t.datetime "published_at"
+    t.datetime "featured_at"
+    t.float "latitude"
+    t.float "longitude"
+    t.float "zoom"
+    t.bigint "library_id"
+    t.text "locale", null: false
+    t.bigint "translation_base_id"
+    t.text "acknowledgements", default: ""
+    t.text "audience", default: ""
+    t.jsonb "authors", default: ""
+    t.text "classroom_timeline", default: ""
+    t.text "dek", default: ""
+    t.text "kicker", default: ""
+    t.jsonb "learning_objectives", default: ""
+    t.text "summary", default: ""
+    t.text "title", default: ""
+    t.jsonb "translators", default: ""
+    t.index ["library_id"], name: "index_cases_on_library_id"
     t.index ["slug"], name: "index_cases_on_slug", unique: true
-    t.index ["tags"], name: "index_cases_on_tags", using: :gin
+    t.index ["translation_base_id"], name: "index_cases_on_translation_base_id"
   end
 
   create_table "comment_threads", id: :serial, force: :cascade do |t|
@@ -302,9 +330,11 @@ ActiveRecord::Schema.define(version: 2019_05_14_190157) do
   end
 
   create_table "groups", id: :serial, force: :cascade do |t|
-    t.hstore "name_i18n"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "context_id"
+    t.jsonb "name", default: ""
+    t.index ["context_id"], name: "index_groups_on_context_id"
   end
 
   create_table "invitations", id: :serial, force: :cascade do |t|
@@ -574,31 +604,46 @@ ActiveRecord::Schema.define(version: 2019_05_14_190157) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "activities", "cases"
   add_foreign_key "answers", "questions"
   add_foreign_key "answers", "quizzes"
   add_foreign_key "answers", "readers"
   add_foreign_key "answers", "submissions"
+  add_foreign_key "cards", "cases"
   add_foreign_key "cards", "pages"
+  add_foreign_key "case_archives", "cases"
+  add_foreign_key "case_elements", "cases"
+  add_foreign_key "cases", "cases", column: "translation_base_id"
   add_foreign_key "comment_threads", "cards"
   add_foreign_key "comment_threads", "cases"
   add_foreign_key "comment_threads", "forums"
   add_foreign_key "comment_threads", "readers"
   add_foreign_key "comments", "comment_threads"
   add_foreign_key "comments", "readers"
+  add_foreign_key "communities", "groups"
+  add_foreign_key "deployments", "cases"
+  add_foreign_key "deployments", "groups"
   add_foreign_key "deployments", "quizzes"
   add_foreign_key "edgenotes", "cards"
+  add_foreign_key "editorships", "cases"
   add_foreign_key "editorships", "readers", column: "editor_id"
+  add_foreign_key "enrollments", "cases"
   add_foreign_key "enrollments", "readers"
+  add_foreign_key "forums", "cases"
   add_foreign_key "forums", "communities"
+  add_foreign_key "group_memberships", "groups"
   add_foreign_key "group_memberships", "readers"
   add_foreign_key "invitations", "communities"
   add_foreign_key "invitations", "readers"
+  add_foreign_key "locks", "cases"
   add_foreign_key "locks", "readers"
   add_foreign_key "managerships", "libraries"
   add_foreign_key "managerships", "readers", column: "manager_id"
+  add_foreign_key "pages", "cases"
+  add_foreign_key "podcasts", "cases"
   add_foreign_key "questions", "quizzes"
+  add_foreign_key "quizzes", "cases"
   add_foreign_key "readers", "communities", column: "active_community_id"
+  add_foreign_key "reading_list_items", "cases"
   add_foreign_key "reading_list_items", "reading_lists"
   add_foreign_key "reading_list_saves", "readers"
   add_foreign_key "reading_list_saves", "reading_lists"
@@ -606,5 +651,6 @@ ActiveRecord::Schema.define(version: 2019_05_14_190157) do
   add_foreign_key "spotlight_acknowledgements", "readers"
   add_foreign_key "submissions", "quizzes"
   add_foreign_key "submissions", "readers"
+  add_foreign_key "taggings", "cases"
   add_foreign_key "taggings", "tags"
 end

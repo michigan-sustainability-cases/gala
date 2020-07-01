@@ -5,7 +5,9 @@ ActiveAdmin.register BlogPost do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  permit_params :title, :blog_category_id, :author_id, :body, :featured
+  permit_params :title, :blog_category_id, :author_id, :body, :featured, :cover_photo,
+                :crop_x, :crop_y, :crop_w, :crop_h
+
   #
   # or
   #
@@ -17,14 +19,47 @@ ActiveAdmin.register BlogPost do
 
   menu parent: "Blog", priority: 1
 
+  form partial: 'form'
+
+
+  controller do
+    def update
+      @blog_post = BlogPost.find(params[:id])
+      if @blog_post.update(blog_post_params)
+        if params[:blog_post][:cover_photo].present?
+          render :crop #, :layout => 'pages'
+        else
+          render :show, notice: 'Blog Post was successfully updated.'
+        end
+      else
+        render :edit
+      end
+    end
+
+    private
+    def blog_post_params
+      params.require(:blog_post).permit(:title, :blog_category_id, :author_id, :body,
+                                        :featured, :cover_photo, :crop_x, :crop_y, :crop_w, :crop_h)
+    end
+  end
+
 
   index do
     selectable_column
     id_column
+
+    column "Photo" do |post|
+      if post.thumbnail
+        image_tag post.thumbnail('50x50')
+      else
+        ''
+      end
+    end
+
     column :title
     column :blog_category
     column :featured
-    column :reader
+    column :author
     column :created_at
     actions
   end

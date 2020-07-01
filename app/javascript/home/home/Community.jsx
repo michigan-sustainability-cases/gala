@@ -4,7 +4,7 @@
  */
 
 import React from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { FormattedMessage } from 'react-intl'
 import Truncate from 'react-truncate'
 
@@ -28,14 +28,17 @@ function Posts () {
             id,
             title,
             body,
-            featured
+            featured,
+            cover_photo_url
           } = blogPost
 
           let url = `/blog_posts/${id}`;
 
           return (
             <PostContainer>
-              <PostImage><InnerPostImage></InnerPostImage></PostImage>
+              <PostImage>
+                <Image src={cover_photo_url}></Image>
+              </PostImage>
               <PostText>
                 <PostTitle>{title}</PostTitle>
                 <PostBody>
@@ -125,3 +128,18 @@ const CaseBlock = ({
     </a>
   </Cell>
 )
+
+export const Image = styled.div.attrs({ className: 'pt-dark' })`
+  background-color: hsl(209, 53%, 76%);
+  background-image: ${p => css`url(${p.src})`};
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  grid-area: image;
+  justify-content: flex-end;
+  min-height: 100px;
+  min-width: 100px;
+  position: relative;
+  box-shadow: inset -1px 0 0 hsla(0, 0%, 0%, 0.2);
+`
