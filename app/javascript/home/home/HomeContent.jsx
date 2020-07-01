@@ -22,22 +22,22 @@ const HomeContent = () => (
     <div id="getting-started">
       <h4>Get Started</h4>
       <div id="getting-started-blocks">
-        <Block icon="" theme="red" id="findcase-block">
-        <div className="pluginWrapper buttonWrapper">
-          <a className="button pt-button pt-intent-primary" id="findcase-btn" href='/catalog/search'>
-            Find a Case
-          </a>
-        </div>
-        <p className="btn-descriptor">
-            Browse free, engaging modules for classrooms, organizations and public education.
+        <Block className="gs-block" icon="" theme="red" id="findcase-block">
+          <div className="pluginWrapper buttonWrapper">
+            <a className="button pt-button pt-intent-primary" id="findcase-btn" href='/catalog/search'>
+              Find a Case
+            </a>
+          </div>
+          <p className="btn-descriptor">
+              Browse free, engaging modules for classrooms, organizations and public education.
           </p>
         </Block>
-        <Block icon="" theme="green" id="makecase-block">
-        <div className="pluginWrapper buttonWrapper">
-          <a className="button pt-button pt-intent-primary" id="makecase-btn" href='/my_cases'>
-            Make a Case
-          </a>
-        </div>
+        <Block className="gs-block" icon="" theme="green" id="makecase-block">
+          <div className="pluginWrapper buttonWrapper">
+            <a className="button pt-button pt-intent-primary" id="makecase-btn" href='/my_cases'>
+              Make a Case
+            </a>
+          </div>
           <p className="btn-descriptor">
             Author your own modules for educators, professionals, or the public.
           </p>
@@ -74,6 +74,9 @@ const HomeContent = () => (
 )
 export default HomeContent
 
+
+
+
 // $FlowFixMe
 const Container = styled.aside.attrs({ className: 'pt-dark' })`
   color: white;
@@ -81,7 +84,7 @@ const Container = styled.aside.attrs({ className: 'pt-dark' })`
   font-family: tenso;
   grid-area: value-proposition;
   grid-gap: 2em 4em;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr 1fr
   hyphens: auto;
   margin-bottom: 1.5em;
   margin-left: 50px;
@@ -94,16 +97,16 @@ const Container = styled.aside.attrs({ className: 'pt-dark' })`
   #getting-started {
     margin-top: 20px;
     grid-column: 1/2;
-  }
 
-  #getting-started-blocks {
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-  }
+    #getting-started-blocks {
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
 
-  .pt-callout {
-  //  width: 250px;
+      .gs-block {
+        min-width: 215px;
+      }
+    }
   }
 
   h1,
@@ -114,8 +117,9 @@ const Container = styled.aside.attrs({ className: 'pt-dark' })`
   }
   h1 {
     font-size: 170%;
-    grid-column: 1 / -1;
+    grid-column: 1 / span 2;
   }
+
   h2 {
     font-size: 130%;
   }
@@ -197,7 +201,6 @@ const Block = styled.div.attrs(({ theme, icon }) => ({
   padding: 1.25em;
   text-align: center;
   margin: 20px;
-
 
   &::before {
     top: 17px !important;

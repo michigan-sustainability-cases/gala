@@ -33,7 +33,7 @@ function Posts () {
           } = blogPost
 
           let url = `/blog_posts/${id}`;
-
+          
           return (
             <PostContainer>
               <PostImage>
@@ -42,10 +42,7 @@ function Posts () {
               <PostText>
                 <PostTitle>{title}</PostTitle>
                 <PostBody>
-                  <Truncate lines={3} ellipsis={<span>...
-                    <br/><a href={url}>Read more</a></span>}>
-                    {body}
-                  </Truncate>
+                  {truncate(body, url)}
                 </PostBody>
               </PostText>
             </PostContainer>
@@ -55,6 +52,25 @@ function Posts () {
     </CatalogSection>
   )
 }
+
+
+function truncate(str, url) {
+    return <ReadMore str={str} url={url} />
+}
+
+
+function ReadMore ({ str, url }) {
+  let result = str.length > 280 ? str.substring(0, 280) : str;
+  return (
+    <span>{result}...<br/>
+    <a href={url}>Read More</a></span>
+  )
+}
+
+
+
+
+
 
 export default Posts
 
@@ -67,6 +83,10 @@ export const PostText = styled.div`
   padding-right: 10px;
   border-top: 1px solid white;
   margin-left: 20px;
+  min-width: 385px;
+  a {
+    color: #bbb;
+  }
 `
 
 export const PostImage = styled.div`
