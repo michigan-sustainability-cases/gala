@@ -43,6 +43,7 @@
  *= require TableOfContents
  *= require Toolbar
  *= require unsupported_browser
+ *= require jquery.Jcrop
  *= require_self
  *= stub print
  */

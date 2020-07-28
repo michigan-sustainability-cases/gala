@@ -27,7 +27,7 @@ ActiveAdmin.register BlogPost do
       @blog_post = BlogPost.find(params[:id])
       if @blog_post.update(blog_post_params)
         if params[:blog_post][:cover_photo].present?
-          render :crop #, :layout => 'pages'
+          render :crop, :layout => 'application'
         else
           render :show, notice: 'Blog Post was successfully updated.'
         end

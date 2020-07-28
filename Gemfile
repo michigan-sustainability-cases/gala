@@ -105,6 +105,7 @@ group :development do
   gem 'memory_profiler'
   gem 'rack-mini-profiler'
   gem 'stackprof'
+  gem 'jquery-rails'
 end
 
 group :development, :test do

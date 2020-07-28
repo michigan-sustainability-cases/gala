@@ -46,7 +46,7 @@ export const Container = styled.div`
   position: relative;
   width: 100%;
   border-radius: 3px 3px 0 0;
-  padding: 10px;
+  padding: 0px;
 `
 
 // $FlowFixMe
@@ -84,6 +84,7 @@ export const PhotoCredit = styled.cite`
 export const Title = styled.h1`
   grid-area: title;
   margin: 20px;
+  padding-bottom: 20px;
 `
 
 export const Kicker = styled.span`

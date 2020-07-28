@@ -12,5 +12,7 @@
 //
 //= require rails-ujs
 //= require ahoy
+//= require jquery3
+//= require jquery.Jcrop
 //= require_directory .
 //= require_directory ./channels

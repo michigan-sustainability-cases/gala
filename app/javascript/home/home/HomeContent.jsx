@@ -116,7 +116,7 @@ const Container = styled.aside.attrs({ className: 'pt-dark' })`
     line-height: 1.2;
   }
   h1 {
-    font-size: 170%;
+    font-size: 140%;
     grid-column: 1 / span 2;
   }
 

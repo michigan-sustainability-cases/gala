@@ -651,6 +651,7 @@ DEPENDENCIES
   ims-lti
   inline_svg
   jbuilder!
+  jquery-rails
   kaminari
   letter_opener
   listen
