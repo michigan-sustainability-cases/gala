@@ -11,10 +11,10 @@ import {
 export default function SocialFollow() {
   return (
     <SocialContainer>
-      {/* <a href="https://www.youtube.com/c/jamesqquick"
+      <a href="https://www.youtube.com/channel/UCY7p3OHqkI_yqIXOt_Kfgsw"
         className="youtube social">
         <FontAwesomeIcon icon={faYoutube} size="2x" />
-      </a>*/}
+      </a>
       <a href="https://www.facebook.com/learngala/"
         className="facebook social">
         <FontAwesomeIcon icon={faFacebook} size="2x" />
