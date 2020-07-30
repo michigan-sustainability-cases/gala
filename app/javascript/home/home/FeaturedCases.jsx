@@ -1,5 +1,5 @@
 /**
- * @providesModule Features
+ * @providesModule FeaturedCases
  * @flow
  */
 
@@ -13,7 +13,7 @@ import TitleCard from 'home/home/TitleCard'
 
 type Props = { selecting: boolean }
 
-function Featured ({ selecting }: Props) {
+function FeaturedCases ({ selecting }: Props) {
   const [{ cases: allCases, enrollments, features }] = React.useContext(
     CatalogDataContext
   )
@@ -57,7 +57,7 @@ function Featured ({ selecting }: Props) {
   )
 }
 
-export default Featured
+export default FeaturedCases
 
 function six (arr) {
   const paddedArr = arr.length < 6 ? [...arr, ...Array(6)] : arr

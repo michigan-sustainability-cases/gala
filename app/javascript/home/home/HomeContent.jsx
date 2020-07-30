@@ -8,7 +8,7 @@
 import * as React from 'react'
 import styled from 'styled-components'
 import { FormattedMessage } from 'react-intl'
-import Features from 'home/home/Features'
+import FeaturedCases from 'home/home/FeaturedCases'
 import Community from 'home/home/Community'
 import YoutubePlayer from 'react-youtube-player'
 
@@ -67,7 +67,7 @@ const HomeContent = () => (
     <div id="home-features">
       <div id="featured-content" className="content-area">
         <h4>Featured Cases</h4>
-        <Features />
+        <FeaturedCases />
       </div>
     </div>
   </Container>
