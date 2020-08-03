@@ -172,7 +172,6 @@ const CaseBlock = ({
 )
 
 export const Image = styled.div.attrs({ className: 'pt-dark' })`
-  background-color: hsl(209, 53%, 76%);
   background-image: ${p => css`url(${p.src})`};
   background-position: center;
   background-size: cover;
@@ -183,5 +182,4 @@ export const Image = styled.div.attrs({ className: 'pt-dark' })`
   min-height: 100px;
   min-width: 100px;
   position: relative;
-  box-shadow: inset -1px 0 0 hsla(0, 0%, 0%, 0.2);
 `
