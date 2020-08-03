@@ -33,7 +33,7 @@ function Posts () {
           } = blogPost
 
           let url = `/blog_posts/${id}`;
-          
+
           return (
             <PostContainer>
               <PostImage>
@@ -48,6 +48,9 @@ function Posts () {
             </PostContainer>
           )
         })}
+        <AllPostsLink href="blog_posts">
+          View all posts...
+        </AllPostsLink>
       </Grid>
     </CatalogSection>
   )
@@ -70,9 +73,8 @@ function ReadMore ({ str, url }) {
 
 
 
-
-
 export default Posts
+
 
 export const PostContainer = styled.div`
   padding: 10px;
@@ -108,6 +110,16 @@ export const PostBody = styled.div`
   padding: 10px;
 `
 
+const AllPostsLink = styled.a`
+  color: #bbb;
+  font-size: 16px;
+  padding: 10px;
+
+  &:hover {
+    color: white;
+  }
+`
+
 function six (arr) {
   const paddedArr = arr.length < 6 ? [...arr, ...Array(6)] : arr
   return paddedArr.slice(0, 6)
@@ -120,6 +132,16 @@ export const Grid = styled.ul`
   grid-gap: 10px;
   grid-template-columns: repeat(1, 1fr);
   grid-template-rows: repeat(6, auto);
+
+  a {
+    color: #bbb;
+    font-size: 16px;
+    padding: 10px;
+
+    &:hover {
+      color: white;
+    }
+  }
 `
 
 const Cell = styled.li`

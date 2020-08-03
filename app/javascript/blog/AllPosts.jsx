@@ -14,7 +14,7 @@ import { CatalogDataContext } from 'home/catalogData'
 import { ReaderDataContext } from 'home/readerData'
 import { ReaderDataContextProvider } from 'home/readerData'
 import { BlogDataContextProvider } from 'blog/blogData'
-import PostContent from 'blog/PostContent'
+import PostList from 'blog/PostList'
 import Announcements from 'home/home/Announcements'
 import Sidebar from 'home/home/Sidebar'
 import { Main, CatalogSection } from 'home/shared'
@@ -25,7 +25,7 @@ import { MaxWidthContainer } from 'utility/styledComponents'
 
 
 
-function BlogPost () {
+function AllPosts () {
   const [{ cases, tags, loading: casesLoading }] = React.useContext(
     CatalogDataContext
   )
@@ -55,7 +55,7 @@ function BlogPost () {
                       <ContentItemSelectionContextConsumer>
                         {({ selecting }) => (
                           <>
-                            <PostContent postData={postData} />
+                            <PostList />
                             <Sidebar />
                           </>
                         )}
@@ -108,7 +108,7 @@ function BlogPost () {
 
 
 
-export default BlogPost
+export default AllPosts
 
 const Container = styled.div`
   min-height: 100%;

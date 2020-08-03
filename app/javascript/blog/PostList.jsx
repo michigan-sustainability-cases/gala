@@ -12,17 +12,17 @@ import Community from 'home/home/Community'
 
 
 
-const PostContent = () => (
+const PostList = () => (
   <Container>
-    <h1>{postData.title}</h1>
+    <h1>Post List</h1>
 
     <div>
-      {postData.body}
+
     </div>
 
   </Container>
 )
-export default PostContent
+export default PostList
 
 // $FlowFixMe
 const Container = styled.aside.attrs({ className: 'pt-dark' })`

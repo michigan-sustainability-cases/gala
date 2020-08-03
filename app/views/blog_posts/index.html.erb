@@ -1,25 +1,17 @@
-<p id="notice"><%= notice %></p>
+<div lang="<%= case_locale %>" id="container">
+</div>
 
-<h1>Blog Posts</h1>
+<%=javascript_tag do %>
+  window.postData = <%=
+  raw ActiveModel::Serializer.for(
+    @blog_posts
+  )
+    .to_json
+  %>
+<% end %>
 
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<%=javascript_pack_tag "all_posts"%>
 
-  <tbody>
-    <% @blog_posts.each do |blog_post| %>
-      <tr>
-        <td><%= link_to 'Show', blog_post %></td>
-        <td><%= link_to 'Edit', edit_blog_post_path(blog_post) %></td>
-        <td><%= link_to 'Destroy', blog_post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<%= content_for :head do %>
 
-<br>
-
-<%= link_to 'New Blog Post', new_blog_post_path %>
+<% end %>

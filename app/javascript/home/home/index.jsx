@@ -6,12 +6,11 @@
 import * as React from 'react'
 import { values } from 'ramda'
 
-import { CatalogDataContext } from 'home/catalogData'
-import { ReaderDataContext } from 'home/readerData'
+import { CatalogDataContext } from 'catalog/catalogData'
+import { ReaderDataContext } from 'catalog/readerData'
 import HomeContent from 'home/home/HomeContent'
 import Announcements from 'home/home/Announcements'
 import Sidebar from 'home/home/Sidebar'
-import { Main, CatalogSection } from 'home/shared'
 import { Consumer as ContentItemSelectionContextConsumer } from 'deployment/contentItemSelectionContext'
 import { useDocumentTitle } from 'utility/hooks'
 

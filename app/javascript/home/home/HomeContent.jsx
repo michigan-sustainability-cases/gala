@@ -5,12 +5,13 @@
  * @flow
  */
 
-import * as React from 'react'
-import styled from 'styled-components'
-import { FormattedMessage } from 'react-intl'
-import FeaturedCases from 'home/home/FeaturedCases'
-import Community from 'home/home/Community'
-import YoutubePlayer from 'react-youtube-player'
+import * as React from 'react';
+import styled from 'styled-components';
+import { FormattedMessage } from 'react-intl';
+import FeaturedCases from 'home/home/FeaturedCases';
+import Community from 'home/home/Community';
+import YoutubePlayer from 'react-youtube-player';
+import GetStarted from './GetStarted';
 
 
 
@@ -19,31 +20,7 @@ const HomeContent = () => (
     <h1>
       <FormattedMessage id="catalog.openAccessLearningTools" />
     </h1>
-    <div id="getting-started">
-      <h4>Get Started</h4>
-      <div id="getting-started-blocks">
-        <Block className="gs-block" icon="" theme="red" id="findcase-block">
-          <div className="pluginWrapper buttonWrapper">
-            <a className="button pt-button pt-intent-primary" id="findcase-btn" href='/catalog/search'>
-              Find a Case
-            </a>
-          </div>
-          <p className="btn-descriptor">
-              Browse free, engaging modules for classrooms, organizations and public education.
-          </p>
-        </Block>
-        <Block className="gs-block" icon="" theme="green" id="makecase-block">
-          <div className="pluginWrapper buttonWrapper">
-            <a className="button pt-button pt-intent-primary" id="makecase-btn" href='/my_cases'>
-              Make a Case
-            </a>
-          </div>
-          <p className="btn-descriptor">
-            Author your own modules for educators, professionals, or the public.
-          </p>
-        </Block>
-      </div>
-    </div>
+    <GetStarted />
     <div id="home-video-container">
       <div id="home-video">
       <YoutubePlayer
@@ -180,34 +157,5 @@ const Container = styled.aside.attrs({ className: 'pt-dark' })`
 
   .content-area {
     padding: 15px;
-  }
-`
-
-const intents = {
-  red: 'pt-intent-danger',
-  green: 'pt-intent-success',
-  blue: 'pt-intent-primary',
-}
-
-const contrastColors = {
-  red: 'hsl(20, 93%, 78%)',
-  green: 'hsl(145, 76%, 73%)',
-  blue: 'hsl(275, 100%, 87%)',
-}
-
-const Block = styled.div.attrs(({ theme, icon }) => ({
-  className: `pt-callout ${intents[theme]} pt-icon-${icon}`,
-}))`
-  padding: 1.25em;
-  text-align: center;
-  margin: 20px;
-
-  &::before {
-    top: 17px !important;
-  }
-
-  &::before,
-  .pt-callout-title {
-    color: ${p => contrastColors[p.theme]} !important;
   }
 `

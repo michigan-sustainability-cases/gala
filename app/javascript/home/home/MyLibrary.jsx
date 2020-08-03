@@ -10,8 +10,8 @@ import { FormattedMessage, injectIntl } from 'react-intl'
 import { Button, Intent } from '@blueprintjs/core'
 
 import { CatalogDataContext } from 'home/catalogData'
-import { SectionTitle, CaseRow, Element } from 'home/shared'
-import EnrollmentInstructions from 'home/home/EnrollmentInstructions'
+import { SectionTitle, CaseRow, Element } from 'catalog/shared'
+import EnrollmentInstructions from 'catalog/home/EnrollmentInstructions'
 import { Orchard } from 'shared/orchard'
 
 import { useToggle } from 'utility/hooks'
