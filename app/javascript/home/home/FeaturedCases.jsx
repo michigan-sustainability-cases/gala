@@ -52,6 +52,9 @@ function FeaturedCases ({ selecting }: Props) {
             />
           )
         })}
+        <AllCases url="catalog/home">
+          <a href="catalog/home">View All Cases...</a>
+        </AllCases>
       </Grid>
     </CatalogSection>
   )
@@ -63,6 +66,28 @@ function six (arr) {
   const paddedArr = arr.length < 6 ? [...arr, ...Array(6)] : arr
   return paddedArr.slice(0, 6)
 }
+
+const AllCases = styled.div`
+
+  a {
+    color: #bbb;
+    font-size: 16px;
+    padding: 10px;
+
+    &:hover {
+      color: white;
+    }
+  }
+`
+
+const AllCasesLink = ({
+  url
+}) => (
+    <a href={url}>
+      View All Cases...
+    </a>
+)
+
 
 export const Grid = styled.ul`
   margin: 0;

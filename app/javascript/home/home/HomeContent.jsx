@@ -53,8 +53,6 @@ export default HomeContent
 
 
 
-
-// $FlowFixMe
 const Container = styled.aside.attrs({ className: 'pt-dark' })`
   color: white;
   display: grid;
@@ -70,6 +68,7 @@ const Container = styled.aside.attrs({ className: 'pt-dark' })`
   @media (max-width: 1000px) {
     grid-template-columns: 1fr;
   }
+
 
   #getting-started {
     margin-top: 20px;
