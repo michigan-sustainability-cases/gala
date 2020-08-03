@@ -65,8 +65,7 @@ function truncate(str, url) {
 function ReadMore ({ str, url }) {
   let result = str.length > 280 ? str.substring(0, 280) : str;
   return (
-    <span>{result}...<br/>
-    <a href={url}>Read More</a></span>
+    <a href={url}><span>{result}...</span><br/>Read More</a>
   )
 }
 
@@ -141,6 +140,10 @@ export const Grid = styled.ul`
     &:hover {
       color: white;
     }
+  }
+
+  a span {
+    color: white;
   }
 `
 
