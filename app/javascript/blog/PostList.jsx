@@ -88,7 +88,7 @@ export const AllPostsHeader = styled.div`
 `
 
 export const PostContainer = styled.div`
-  padding: 10px;
+  padding: 15px;
   display: flex;
   flex-flow: row wrap;
   margin-bottom: 20px;
@@ -102,7 +102,6 @@ export const PostContainer = styled.div`
 
 export const PostText = styled.div`
   padding-right: 10px;
-  margin-left: 20px;
   a {
     color: #bbb;
   }
@@ -118,7 +117,6 @@ export const PostText = styled.div`
 `
 
 export const PostImage = styled.div`
-  margin-top: 20px;
 
   @media all and (min-width: 600px) {
     flex: 1 0 0;
@@ -127,11 +125,11 @@ export const PostImage = styled.div`
 `
 
 export const PostTitle = styled.div`
-  padding: 10px;
   font-weight: bold;
+  margin-bottom: 20px;
 `
 export const PostFooter = styled.div`
-  padding: 10px;
+  padding-right: 10px;
   font-weight: bold;
   text-align: right;
   @media all and (min-width: 600px) {
@@ -139,9 +137,8 @@ export const PostFooter = styled.div`
   }
 `
 
-
 export const PostBody = styled.div`
-  padding: 10px;
+
 `
 
 export const Container = styled.div`
