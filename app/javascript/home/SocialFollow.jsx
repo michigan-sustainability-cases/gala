@@ -13,11 +13,11 @@ export default function SocialFollow() {
     <SocialContainer>
       <a href="https://www.youtube.com/channel/UCY7p3OHqkI_yqIXOt_Kfgsw"
         className="youtube social">
-        <FontAwesomeIcon icon={faYoutube} size="1x" />
+        <FontAwesomeIcon icon={faYoutube} size="1.5x" />
       </a>
       <a href="https://www.facebook.com/learngala/"
         className="facebook social">
-        <FontAwesomeIcon icon={faFacebook} size="1x" />
+        <FontAwesomeIcon icon={faFacebook} size="1.5x" />
       </a>
       <a href="https://www.twitter.com/LearnMSC" className="twitter social">
         <FontAwesomeIcon icon={faTwitter} size="1.5x" />
@@ -32,6 +32,12 @@ export default function SocialFollow() {
 
 const SocialContainer = styled.div`
   padding: 25px 30px;
+  display: inline;
+  grid-column: 2;
+  text-align: right;
+  margin-right: 75px;
+  font-size: 140%;
+  margin-top: -75px;
 
   a {
   //  background-color: white;
@@ -51,7 +57,7 @@ const SocialContainer = styled.div`
     .fa-youtube {
       color: #eb3223;
       color: white;
-      background-image: linear-gradient( to bottom, transparent 20%, white 20%, white 93%, transparent 93% );
+      background-image: linear-gradient( to bottom, transparent 20%, black 20%, black 93%, transparent 93% );
       background-size: 51%;
       background-position: 51% -2px;
       background-repeat: no-repeat;
@@ -59,11 +65,9 @@ const SocialContainer = styled.div`
   }
 
   a.facebook {
-    color: #4968ad;
-    color: white;
     .fa-facebook {
-      color: #3b5998;
-      background-image: linear-gradient( to bottom, transparent 20%, white 20%, white 93%, transparent 93% );
+      color: white;
+      background-image: linear-gradient( to bottom, transparent 20%, black 20%, black 93%, transparent 93% );
       background-size: 44%;
       background-position: 50% 0;
       background-repeat: no-repeat;

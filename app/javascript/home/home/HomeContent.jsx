@@ -20,8 +20,8 @@ const HomeContent = () => (
   <Container>
     <h1>
       <FormattedMessage id="catalog.openAccessLearningTools" />
-      <SocialFollow />
     </h1>
+    <SocialFollow />
     <GetStarted />
     <div id="home-video-container">
       <div id="home-video">
