@@ -11,7 +11,7 @@ class BlogPost < ApplicationRecord
     self.thumbnail
   end
 
-  def thumbnail(size = '35x')
+  def thumbnail(size = '130x')
     logger.info "called thumbnail - post_id = #{id}"
     cropped_image(cover_photo, size)
   end

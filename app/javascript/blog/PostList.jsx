@@ -39,15 +39,18 @@ function Posts () {
 
           return (
             <PostContainer>
-              <PostImage>
-                <Image src={cover_photo_url}></Image>
-              </PostImage>
+              <PostTitle>{title}</PostTitle>
               <PostText>
-                <PostTitle>{title}</PostTitle>
                 <PostBody>
                   {truncate(body, url)}
                 </PostBody>
               </PostText>
+              <PostImage>
+                <Image src={cover_photo_url}></Image>
+              </PostImage>
+              <PostFooter>
+                <a href={url}><div class="read-more-link">Read More</div></a>
+              </PostFooter>
             </PostContainer>
           )
         })}
@@ -62,10 +65,9 @@ function truncate(str, url) {
 }
 
 function ReadMore ({ str, url }) {
-  let result = str.length > 280 ? str.substring(0, 280) : str;
+  let result = str.length > 300 ? str.substring(0, 300) : str;
   return (
-    <a href={url}><span>{result}...</span>
-    <div class="read-more-link">Read More</div></a>
+    <a href={url}><span>{result}...</span></a>
   )
 }
 
@@ -76,7 +78,6 @@ export default Posts
 
 export const AllPostsHeader = styled.div`
   padding: 10px;
-  display: flex;
   margin-bottom: 20px;
   color: #eae9e4;
 
@@ -89,15 +90,19 @@ export const AllPostsHeader = styled.div`
 export const PostContainer = styled.div`
   padding: 10px;
   display: flex;
+  flex-flow: row wrap;
   margin-bottom: 20px;
   background-color: #eae9e4;
   border-radius: 6px;
+
+  * {
+    flex: 1 100%;
+  }
 `
 
 export const PostText = styled.div`
   padding-right: 10px;
   margin-left: 20px;
-  min-width: 385px;
   a {
     color: #bbb;
   }
@@ -105,22 +110,35 @@ export const PostText = styled.div`
     text-align: right;
     margin-top: 10px;
   }
+
+  @media all and (min-width: 600px) {
+    flex: 3 0px;
+    order: 2;
+  }
 `
 
 export const PostImage = styled.div`
   margin-top: 20px;
-`
-export const InnerPostImage = styled.div`
-  width: 150px;
-  height: 150px;
-  margin: 0px;
-  background-color: #ddd;
+
+  @media all and (min-width: 600px) {
+    flex: 1 0 0;
+    order: 1;
+  }
 `
 
 export const PostTitle = styled.div`
   padding: 10px;
   font-weight: bold;
 `
+export const PostFooter = styled.div`
+  padding: 10px;
+  font-weight: bold;
+  text-align: right;
+  @media all and (min-width: 600px) {
+    order: 4;
+  }
+`
+
 
 export const PostBody = styled.div`
   padding: 10px;
@@ -159,11 +177,9 @@ export const Image = styled.div.attrs({ className: 'pt-dark' })`
   background-image: ${p => css`url(${p.src})`};
   background-position: center;
   background-size: cover;
-  display: flex;
-  flex-direction: column;
-  grid-area: image;
   justify-content: flex-end;
-  min-height: 100px;
-  min-width: 100px;
-  position: relative;
+  min-height: 130px;
+  min-width: 130px;
+  width: 130px;
+  height: 130px;
 `
