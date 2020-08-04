@@ -52,6 +52,7 @@ function FeaturedCases ({ selecting }: Props) {
             />
           )
         })}
+        <p></p>
         <AllCases url="catalog/home">
           <a href="catalog/home">View All Cases...</a>
         </AllCases>
@@ -68,11 +69,14 @@ function six (arr) {
 }
 
 const AllCases = styled.div`
-
+  text-align: right;
+  margin-top: 15px;
+  
   a {
     color: #bbb;
     font-size: 16px;
     padding: 10px;
+    text-align: right;
 
     &:hover {
       color: white;

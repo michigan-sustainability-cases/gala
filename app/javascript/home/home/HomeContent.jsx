@@ -12,6 +12,7 @@ import FeaturedCases from 'home/home/FeaturedCases';
 import Community from 'home/home/Community';
 import YoutubePlayer from 'react-youtube-player';
 import GetStarted from './GetStarted';
+import SocialFollow from "home/SocialFollow"
 
 
 
@@ -19,6 +20,7 @@ const HomeContent = () => (
   <Container>
     <h1>
       <FormattedMessage id="catalog.openAccessLearningTools" />
+      <SocialFollow />
     </h1>
     <GetStarted />
     <div id="home-video-container">

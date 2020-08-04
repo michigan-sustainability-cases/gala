@@ -109,9 +109,10 @@ export const PostBody = styled.div`
 `
 
 const AllPostsLink = styled.a`
-  color: #bbb;
+  color: white;
   font-size: 16px;
   padding: 10px;
+  text-align: right;
 
   &:hover {
     color: white;

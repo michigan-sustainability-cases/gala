@@ -13,14 +13,14 @@ export default function SocialFollow() {
     <SocialContainer>
       <a href="https://www.youtube.com/channel/UCY7p3OHqkI_yqIXOt_Kfgsw"
         className="youtube social">
-        <FontAwesomeIcon icon={faYoutube} size="2x" />
+        <FontAwesomeIcon icon={faYoutube} size="1x" />
       </a>
       <a href="https://www.facebook.com/learngala/"
         className="facebook social">
-        <FontAwesomeIcon icon={faFacebook} size="2x" />
+        <FontAwesomeIcon icon={faFacebook} size="1x" />
       </a>
       <a href="https://www.twitter.com/LearnMSC" className="twitter social">
-        <FontAwesomeIcon icon={faTwitter} size="2x" />
+        <FontAwesomeIcon icon={faTwitter} size="1.5x" />
       </a>
        {/* <a href="https://www.instagram.com/learnbuildteach"
         className="instagram social">
@@ -50,6 +50,7 @@ const SocialContainer = styled.div`
   a.youtube {
     .fa-youtube {
       color: #eb3223;
+      color: white;
       background-image: linear-gradient( to bottom, transparent 20%, white 20%, white 93%, transparent 93% );
       background-size: 51%;
       background-position: 51% -2px;
@@ -59,6 +60,7 @@ const SocialContainer = styled.div`
 
   a.facebook {
     color: #4968ad;
+    color: white;
     .fa-facebook {
       color: #3b5998;
       background-image: linear-gradient( to bottom, transparent 20%, white 20%, white 93%, transparent 93% );
@@ -70,6 +72,7 @@ const SocialContainer = styled.div`
 
   a.twitter {
     color: #49a1eb;
+    color: white;
   }
 
   a.instagram {

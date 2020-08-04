@@ -19,7 +19,6 @@ import { ReaderDataContext } from 'home/readerData'
 import type { IntlShape } from 'react-intl'
 import type { ContextRouter } from 'react-router-dom'
 
-import SocialFollow from "./SocialFollow"
 
 
 type Props = {| ...ContextRouter |}
@@ -55,8 +54,7 @@ const HomeToolbar = ({ history }: Props) => {
             ],
             [],
 
-            [{ component: <SocialFollow /> },
-              { component: <Search /> }],
+            [{ component: <Search /> }]
           ]}
         />
       )}
