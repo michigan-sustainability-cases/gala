@@ -61,7 +61,6 @@ function truncate(str, url) {
     return <ReadMore str={str} url={url} />
 }
 
-
 function ReadMore ({ str, url }) {
   let result = str.length > 280 ? str.substring(0, 280) : str;
   return (

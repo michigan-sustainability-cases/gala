@@ -26,19 +26,17 @@ export default PostContent
 
 // $FlowFixMe
 const Container = styled.aside.attrs({ className: 'pt-dark' })`
-  color: white;
-  display: grid;
+  background-color: #eae9e4;
+  padding: 50px;
+  padding-left: 100px;
+  padding-right: 100px;
+  color: black;
   font-family: tenso;
-  grid-area: value-proposition;
-  grid-gap: 2em 4em;
-  grid-template-columns: repeat(2, 1fr);
-  hyphens: auto;
-  margin-bottom: 1.5em;
-  margin-left: 50px;
-  margin-right: 50px;
+  width: 60%;
+  margin: auto;
+  margin-top: 50px;
 
   @media (max-width: 1000px) {
-    grid-template-columns: 1fr;
   }
 
   #getting-started {
@@ -64,64 +62,13 @@ const Container = styled.aside.attrs({ className: 'pt-dark' })`
   }
   h1 {
     font-size: 170%;
-    grid-column: 1 / -1;
   }
   h2 {
     font-size: 130%;
   }
 
-  h1,
-  p {
-    margin-bottom: 0;
-  }
-
-  h4 {
-    text-transform: uppercase;
-  }
-
-  #home-video-container {
-    grid-column: 2;
-
-    @media (max-width: 1000px) {
-      grid-column: 1;
-    }
-  }
-
-  #home-video {
-    height: 200px;
-    width: 300px;
-    background-color: grey;
-  }
-
-  #community-content,
-  #featured-content {
-    background-color: #415e77;
-  }
-
-  #findcase-btn,
-  #makecase-btn {
-    color: #423e59;
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
-
-  #findcase-btn {
-    background-color: #feb294;
-  }
-  #makecase-btn {
-    background-color: #a0ebb6;
-  }
-
-  .btn-descriptor {
-    text-align: left;
-  }
-
-  #findcase-block {
-    border: 1px solid #feb294;
-  }
-
-  #makecase-block {
-    border: 1px solid #a0ebb6;
+  h1 {
+    margin-bottom: 30px;
   }
 
   .content-area {

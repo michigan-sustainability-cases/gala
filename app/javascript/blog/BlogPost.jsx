@@ -56,7 +56,6 @@ function BlogPost () {
                         {({ selecting }) => (
                           <>
                             <PostContent postData={postData} />
-                            <Sidebar />
                           </>
                         )}
                       </ContentItemSelectionContextConsumer>
@@ -112,35 +111,22 @@ export default BlogPost
 
 const Container = styled.div`
   min-height: 100%;
-  width: 100vw;
-  overflow: hidden;
+  width: 100%;
+  margin: auto;
 `
 
 const Window = styled.div`
-  display: grid;
-  grid-gap: 0 1rem;
-  grid-template:
-    'sidebar value-proposition' minmax(0, auto)
-    'sidebar banner' minmax(0, auto)
-    'sidebar main' min-content / 19em calc(100% - 19em - 1em);
   min-height: 100%;
   position: relative;
   padding: 2em 1em;
   margin: 0;
 
   @media (max-width: 1100px) {
-    grid-template:
-      'sidebar value-proposition' minmax(0, auto)
-      'sidebar banner' minmax(0, auto)
-      'sidebar main' min-content / 15em calc(100% - 15em - 1em);
+
   }
 
   @media (max-width: 700px) {
-    grid-template: 'value-proposition' 'sidebar' 'banner' 'main' auto / 100%;
 
-    & .devise-card {
-      margin: auto;
-    }
   }
 `
 

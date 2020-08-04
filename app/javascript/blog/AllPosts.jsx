@@ -56,7 +56,6 @@ function AllPosts () {
                         {({ selecting }) => (
                           <>
                             <PostList />
-                            <Sidebar />
                           </>
                         )}
                       </ContentItemSelectionContextConsumer>
@@ -71,43 +70,6 @@ function AllPosts () {
 }
 
 
-
-
-  // {blogPosts.map((blogPost, i) => {
-  //   if (blogPost == null) return <Cell key={i} />
-  //
-  //   const {
-  //     id,
-  //     title,
-  //     body,
-  //     featured
-  //   } = blogPost
-  //
-  //   let url = `/blog_posts/${id}`;
-  //
-  //   return (
-  //     <PostContainer>
-  //       <PostImage><InnerPostImage></InnerPostImage></PostImage>
-  //       <PostText>
-  //         <PostTitle>{title}</PostTitle>
-  //         <PostBody>
-  //           <Truncate lines={3} ellipsis={<span>...
-  //             <br/><a href={url}>Read more</a></span>}>
-  //             {body}
-  //           </Truncate>
-  //         </PostBody>
-  //       </PostText>
-  //     </PostContainer>
-  //   )
-  // })}
-
-
-
-
-
-
-
-
 export default AllPosts
 
 const Container = styled.div`
@@ -117,26 +79,16 @@ const Container = styled.div`
 `
 
 const Window = styled.div`
-  display: grid;
-  grid-gap: 0 1rem;
-  grid-template:
-    'sidebar value-proposition' minmax(0, auto)
-    'sidebar banner' minmax(0, auto)
-    'sidebar main' min-content / 19em calc(100% - 19em - 1em);
   min-height: 100%;
   position: relative;
   padding: 2em 1em;
   margin: 0;
 
   @media (max-width: 1100px) {
-    grid-template:
-      'sidebar value-proposition' minmax(0, auto)
-      'sidebar banner' minmax(0, auto)
-      'sidebar main' min-content / 15em calc(100% - 15em - 1em);
+
   }
 
   @media (max-width: 700px) {
-    grid-template: 'value-proposition' 'sidebar' 'banner' 'main' auto / 100%;
 
     & .devise-card {
       margin: auto;

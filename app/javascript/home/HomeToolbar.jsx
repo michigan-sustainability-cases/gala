@@ -38,7 +38,7 @@ const HomeToolbar = ({ history }: Props) => {
               {
                 message: 'home.home',
                 icon: 'home',
-                onClick: () => history.push('/')
+                onClick: () => (window.location = '/'),
               },
               {
                 message: 'catalog.catalog',
