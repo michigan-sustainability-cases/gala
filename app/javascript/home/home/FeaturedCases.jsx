@@ -71,7 +71,7 @@ function six (arr) {
 const AllCases = styled.div`
   text-align: right;
   margin-top: 15px;
-  
+
   a {
     color: #bbb;
     font-size: 16px;
@@ -83,15 +83,6 @@ const AllCases = styled.div`
     }
   }
 `
-
-const AllCasesLink = ({
-  url
-}) => (
-    <a href={url}>
-      View All Cases...
-    </a>
-)
-
 
 export const Grid = styled.ul`
   margin: 0;

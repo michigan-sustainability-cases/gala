@@ -56,6 +56,9 @@ function BlogPost () {
                         {({ selecting }) => (
                           <>
                             <PostContent postData={postData} />
+                            <MorePostsLink url="catalog/home">
+                              <a href="/blog_posts">More Posts &gt;</a>
+                            </MorePostsLink>
                           </>
                         )}
                       </ContentItemSelectionContextConsumer>
@@ -68,42 +71,6 @@ function BlogPost () {
     </ErrorBoundary>
   )
 }
-
-
-
-
-  // {blogPosts.map((blogPost, i) => {
-  //   if (blogPost == null) return <Cell key={i} />
-  //
-  //   const {
-  //     id,
-  //     title,
-  //     body,
-  //     featured
-  //   } = blogPost
-  //
-  //   let url = `/blog_posts/${id}`;
-  //
-  //   return (
-  //     <PostContainer>
-  //       <PostImage><InnerPostImage></InnerPostImage></PostImage>
-  //       <PostText>
-  //         <PostTitle>{title}</PostTitle>
-  //         <PostBody>
-  //           <Truncate lines={3} ellipsis={<span>...
-  //             <br/><a href={url}>Read more</a></span>}>
-  //             {body}
-  //           </Truncate>
-  //         </PostBody>
-  //       </PostText>
-  //     </PostContainer>
-  //   )
-  // })}
-
-
-
-
-
 
 
 
@@ -127,6 +94,24 @@ const Window = styled.div`
 
   @media (max-width: 700px) {
 
+  }
+`
+
+const MorePostsLink = styled.div`
+  text-align: right;
+  width: 60%;
+  margin: auto;
+  margin-top: 10px;
+
+  a {
+    color: #bbb;
+    font-size: 16px;
+    padding: 10px;
+    text-align: right;
+
+    &:hover {
+      color: white;
+    }
   }
 `
 

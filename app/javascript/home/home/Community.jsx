@@ -92,12 +92,6 @@ export const PostText = styled.div`
 export const PostImage = styled.div`
   margin-top: 20px;
 `
-export const InnerPostImage = styled.div`
-  width: 150px;
-  height: 150px;
-  margin: 0px;
-  background-color: #ddd;
-`
 
 export const PostTitle = styled.div`
   padding: 10px;

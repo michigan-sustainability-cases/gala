@@ -5,23 +5,30 @@
  * @flow
  */
 
-import * as React from 'react'
-import styled from 'styled-components'
-import { FormattedMessage } from 'react-intl'
-import Community from 'home/home/Community'
+import * as React from 'react';
+import styled, { css } from 'styled-components';
+import { FormattedMessage } from 'react-intl';
+import Community from 'home/home/Community';
 
 
 
-const PostContent = () => (
-  <Container>
-    <h1>{postData.title}</h1>
+function PostContent () {
 
-    <div>
-      {postData.body}
-    </div>
+  return (
+    <Container>
+      <h1>{postData.title}</h1>
+      <PostImage>
+        <Image src={postData.photoUrl}></Image>
+      </PostImage>
+      <div>
+        {postData.body}
+      </div>
+    </Container>
+  )
+}
 
-  </Container>
-)
+
+
 export default PostContent
 
 // $FlowFixMe
@@ -104,4 +111,20 @@ const Block = styled.div.attrs(({ theme, icon }) => ({
   .pt-callout-title {
     color: ${p => contrastColors[p.theme]} !important;
   }
+`
+
+export const PostImage = styled.div`
+  margin-top: 20px;
+`
+
+export const Image = styled.div.attrs({ className: 'pt-dark' })`
+  background-image: ${p => css`url(${p.src})`};
+  background-position: center;
+  background-size: cover;
+  min-height: 100px;
+  min-width: 100px;
+  width: 200px;
+  height: 200px;
+  float: right;
+  margin-left: 20px;
 `
