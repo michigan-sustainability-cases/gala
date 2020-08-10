@@ -43,6 +43,9 @@ function Posts () {
                 <PostTitle>{title}</PostTitle>
                 <PostBody>
                   {truncate(body, url)}
+                  <PostFooter>
+                    <a href={url}><div class="read-more-link">Read More</div></a>
+                  </PostFooter>
                 </PostBody>
               </PostText>
             </PostContainer>
@@ -58,15 +61,13 @@ function Posts () {
 
 
 function truncate(str, url) {
-    return <ReadMore str={str} url={url} />
-}
-
-function ReadMore ({ str, url }) {
   let result = str.length > 280 ? str.substring(0, 280) : str;
   return (
-    <a href={url}><span>{result}...</span><br/>Read More</a>
+    <a href={url}><span>{result.trim()}...</span></a>
   )
+
 }
+
 
 
 
@@ -77,6 +78,7 @@ export default Posts
 export const PostContainer = styled.div`
   padding: 10px;
   display: flex;
+  padding-bottom: 0px;
 `
 
 export const PostText = styled.div`
@@ -86,6 +88,10 @@ export const PostText = styled.div`
   min-width: 385px;
   a {
     color: #bbb;
+  }
+
+  .rightalign {
+    text-align: right;
   }
 `
 
@@ -100,6 +106,16 @@ export const PostTitle = styled.div`
 
 export const PostBody = styled.div`
   padding: 10px;
+`
+
+export const PostFooter = styled.div`
+  padding-right: 10px;
+  font-weight: bold;
+  text-align: right;
+  line-height: 100%;
+  @media all and (min-width: 600px) {
+    order: 4;
+  }
 `
 
 const AllPostsLink = styled.a`

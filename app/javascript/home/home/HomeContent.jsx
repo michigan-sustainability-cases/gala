@@ -145,11 +145,13 @@ const Container = styled.aside.attrs({ className: 'pt-dark' })`
   h4 {
     text-transform: uppercase;
     margin: 0px !important;
+    font-size: 16px;
   }
 
   #community-content,
   #featured-content {
     background-color: #415e77;
+    padding-bottom: 0px;
   }
 
   #findcase-btn,
