@@ -18,35 +18,41 @@ import SocialFollow from "home/SocialFollow"
 
 const HomeContent = () => (
   <Container>
-    <h1>
-      <FormattedMessage id="catalog.openAccessLearningTools" />
-    </h1>
-    <SocialFollow />
-    <GetStarted />
-    <div id="home-video-container">
-      <div id="home-video">
-      <YoutubePlayer
-          videoId='Y8JZkCcqOZo'
-          playbackState='unstarted'
-          configuration={
-              {
-                  showinfo: 0,
-                  controls: 0
-              }
-          }
-      />
+    <div class="flexdiv">
+      <h1>
+        <FormattedMessage id="catalog.openAccessLearningTools" />
+      </h1>
+      <SocialFollow />
+    </div>
+    <div class="flexdiv">
+      <GetStarted />
+      <div id="home-video-container">
+        <div id="home-video">
+        <YoutubePlayer
+            videoId='Y8JZkCcqOZo'
+            playbackState='unstarted'
+            configuration={
+                {
+                    showinfo: 0,
+                    controls: 0
+                }
+            }
+        />
+        </div>
       </div>
     </div>
-    <div id="home-community">
-      <div id="community-content" className="content-area">
-        <h4>Community</h4>
-        <Community />
+    <div class="flexdiv">
+      <div id="home-community">
+        <div id="community-content" className="content-area">
+          <h4>Community</h4>
+          <Community />
+        </div>
       </div>
-    </div>
-    <div id="home-features">
-      <div id="featured-content" className="content-area">
-        <h4>Featured Cases</h4>
-        <FeaturedCases />
+      <div id="home-features">
+        <div id="featured-content" className="content-area">
+          <h4>Featured Cases</h4>
+          <FeaturedCases />
+        </div>
       </div>
     </div>
   </Container>
@@ -59,22 +65,31 @@ const Container = styled.aside.attrs({ className: 'pt-dark' })`
   color: white;
   display: grid;
   font-family: tenso;
-  grid-area: value-proposition;
+  /* grid-area: value-proposition;
   grid-gap: 2em 4em;
-  grid-template-columns: 1fr 1fr
+  grid-template-columns: 1fr 1fr */
+  display: flex;
+  flex-flow: row wrap;
   hyphens: auto;
   margin-bottom: 1.5em;
   margin-left: 50px;
   margin-right: 50px;
 
   @media (max-width: 1000px) {
-    grid-template-columns: 1fr;
+    //grid-template-columns: 1fr;
+  }
+
+  .flexdiv {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 80px;
   }
 
 
   #getting-started {
     margin-top: 20px;
-    grid-column: 1/2;
+    width: 55%;
 
     #getting-started-blocks {
       width: 100%;
@@ -87,6 +102,27 @@ const Container = styled.aside.attrs({ className: 'pt-dark' })`
     }
   }
 
+  #home-video-container {
+
+    @media (max-width: 1000px) {
+
+    }
+  }
+
+  #home-video {
+    height: 300px;
+    width: 450px;
+    background-color: grey;
+  }
+
+  #home-community {
+    width: 55%;
+  }
+
+  #home-features {
+    width: 40%;
+  }
+
   h1,
   h2 {
     color: inherit;
@@ -95,7 +131,6 @@ const Container = styled.aside.attrs({ className: 'pt-dark' })`
   }
   h1 {
     font-size: 140%;
-    grid-column: 1 / span 2;
   }
 
   h2 {
@@ -109,20 +144,7 @@ const Container = styled.aside.attrs({ className: 'pt-dark' })`
 
   h4 {
     text-transform: uppercase;
-  }
-
-  #home-video-container {
-    grid-column: 2;
-
-    @media (max-width: 1000px) {
-      grid-column: 1;
-    }
-  }
-
-  #home-video {
-    height: 300px;
-    width: 450px;
-    background-color: grey;
+    margin: 0px !important;
   }
 
   #community-content,

@@ -7,7 +7,7 @@ export default function GetStarted() {
     <div id="getting-started">
       <h4>Get Started</h4>
       <div id="getting-started-blocks">
-        <Block className="gs-block" icon="" theme="red" id="findcase-block">
+        <Block className="gs-block" theme="red" id="findcase-block">
           <div className="pluginWrapper buttonWrapper">
             <a className="button pt-button pt-intent-primary" id="findcase-btn" href='/catalog/search'>
               Find a Case
@@ -17,7 +17,7 @@ export default function GetStarted() {
               Browse free, engaging modules for classrooms, organizations and public education.
           </p>
         </Block>
-        <Block className="gs-block" icon="" theme="green" id="makecase-block">
+        <Block className="gs-block" theme="green" id="makecase-block">
           <div className="pluginWrapper buttonWrapper">
             <a className="button pt-button pt-intent-primary" id="makecase-btn" href='/my_cases'>
               Make a Case
@@ -33,11 +33,11 @@ export default function GetStarted() {
 }
 
 const Block = styled.div.attrs(({ theme, icon }) => ({
-  className: `pt-callout ${intents[theme]} pt-icon-${icon}`,
+  className: `pt-callout ${intents[theme]}`,
 }))`
   padding: 1.25em;
   text-align: center;
-  margin: 20px;
+  margin: 20px !important;
 
   &::before {
     top: 17px !important;

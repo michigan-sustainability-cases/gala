@@ -32,12 +32,10 @@ export default function SocialFollow() {
 
 const SocialContainer = styled.div`
   padding: 25px 30px;
-  display: inline;
-  grid-column: 2;
   text-align: right;
-  margin-right: 75px;
+  margin-right: 0px;
   font-size: 140%;
-  margin-top: -75px;
+  margin-top: -20px;
 
   a {
   //  background-color: white;
