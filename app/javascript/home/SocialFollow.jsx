@@ -57,7 +57,7 @@ const SocialContainer = styled.div`
     .fa-youtube {
       color: #eb3223;
       color: white;
-      background-image: linear-gradient( to bottom, transparent 20%, black 20%, black 93%, transparent 93% );
+      // background-image: linear-gradient( to bottom, transparent 20%, black 20%, black 93%, transparent 93% );
       background-size: 51%;
       background-position: 51% -2px;
       background-repeat: no-repeat;
@@ -67,7 +67,7 @@ const SocialContainer = styled.div`
   a.facebook {
     .fa-facebook {
       color: white;
-      background-image: linear-gradient( to bottom, transparent 20%, black 20%, black 93%, transparent 93% );
+      // background-image: linear-gradient( to bottom, transparent 20%, black 20%, black 93%, transparent 93% );
       background-size: 44%;
       background-position: 50% 0;
       background-repeat: no-repeat;
@@ -82,7 +82,7 @@ const SocialContainer = styled.div`
   a.instagram {
     .fa-instagram {
       color: black;
-      background-image: linear-gradient( to bottom, transparent 20%, white 20%, white 93%, transparent 93% );
+      // background-image: linear-gradient( to bottom, transparent 20%, white 20%, white 93%, transparent 93% );
       background-size: 83%;
       background-position: 2px -2px;
       background-repeat: no-repeat;
