@@ -145,7 +145,7 @@ export const Grid = styled.ul`
   a {
     color: #bbb;
     font-size: 16px;
-    padding: 10px;
+    padding: 0px;
 
     &:hover {
       color: white;
