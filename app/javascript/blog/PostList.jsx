@@ -88,7 +88,7 @@ export const AllPostsHeader = styled.div`
 `
 
 export const PostContainer = styled.div`
-  padding: 15px;
+  padding: 25px;
   display: flex;
   flex-flow: row wrap;
   margin-bottom: 20px;
