@@ -1,0 +1,25 @@
+<h1>Crop Image</h1>
+
+<%= image_tag @blog_setting.image, id: "cropbox" %>
+
+<h4>Preview</h4>
+<div style="width:142px; height:100px; overflow:hidden">
+  <%= image_tag @blog_setting.image, :id => "preview" %>
+</div>
+
+<%= semantic_form_for [:admin, @blog_setting], builder: ActiveAdmin::FormBuilder do |f| %>
+  <% %w[x y w h].each do |attribute| %>
+    <%= f.hidden_field "crop_#{attribute}" %>
+  <% end %>
+  <div class="actions">
+    <%= f.submit "Crop" %>
+  </div>
+<% end %>
+
+<%= javascript_include_tag 'gyld_cropper'  %>
+<script>
+  $(function() {
+    let aspectRatio = 1.42;
+    new GyldCropper(aspectRatio);
+  });
+</script>

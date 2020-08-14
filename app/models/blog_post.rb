@@ -8,11 +8,14 @@ class BlogPost < ApplicationRecord
   has_one_attached :cover_photo, dependent: :destroy
 
   def cover_photo_url
-    self.thumbnail
+    if cover_photo.attached?
+      self.thumbnail
+    else
+      BlogSetting.default_image.thumbnail
+    end
   end
 
   def thumbnail(size = '130x')
-    logger.info "called thumbnail - post_id = #{id}"
     cropped_image(cover_photo, size)
   end
 

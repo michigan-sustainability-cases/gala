@@ -1,0 +1,21 @@
+<%= semantic_form_for [:admin, @blog_setting], builder: ActiveAdmin::FormBuilder do |f| %>
+
+  <fieldset class="inputs">
+    <ol>
+      <li class="form-group">
+        <%= f.input :name  %>
+      </li>
+      <li class="form-group">
+        <%= f.input :value  %>
+      </li>
+      <li class="form-group">
+        <label>Image:</label>
+        <%= f.file_field :image  %>
+      </li>
+      <li class="form-group">
+        <%= f.actions %>
+      </li>
+    </ol>
+  </fieldset>
+
+<% end %>

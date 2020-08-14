@@ -9,7 +9,7 @@ export default function GetStarted() {
       <div id="getting-started-blocks">
         <Block className="gs-block" theme="red" id="findcase-block">
           <div className="pluginWrapper buttonWrapper">
-            <a className="button pt-button pt-intent-primary" id="findcase-btn" href='/catalog/search'>
+            <a className="button pt-button pt-intent-primary" id="findcase-btn" href='/catalog/home'>
               Find a Case
             </a>
           </div>

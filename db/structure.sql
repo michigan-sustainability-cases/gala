@@ -439,6 +439,40 @@ ALTER SEQUENCE public.blog_posts_id_seq OWNED BY public.blog_posts.id;
 
 
 --
+-- Name: blog_settings; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.blog_settings (
+    id bigint NOT NULL,
+    name character varying,
+    value character varying,
+    image character varying,
+    crop_settings json,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: blog_settings_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.blog_settings_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: blog_settings_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.blog_settings_id_seq OWNED BY public.blog_settings.id;
+
+
+--
 -- Name: cards; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1787,6 +1821,13 @@ ALTER TABLE ONLY public.blog_posts ALTER COLUMN id SET DEFAULT nextval('public.b
 
 
 --
+-- Name: blog_settings id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.blog_settings ALTER COLUMN id SET DEFAULT nextval('public.blog_settings_id_seq'::regclass);
+
+
+--
 -- Name: cards id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -2144,6 +2185,14 @@ ALTER TABLE ONLY public.blog_categories
 
 ALTER TABLE ONLY public.blog_posts
     ADD CONSTRAINT blog_posts_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: blog_settings blog_settings_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.blog_settings
+    ADD CONSTRAINT blog_settings_pkey PRIMARY KEY (id);
 
 
 --
@@ -3703,6 +3752,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200602174721'),
 ('20200610193624'),
 ('20200610194554'),
-('20200701190422');
+('20200701190422'),
+('20200814153757');
 
 

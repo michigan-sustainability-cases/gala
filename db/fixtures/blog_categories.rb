@@ -14,5 +14,5 @@ BlogCategory.seed(:id,
   {
     :id => 4,
     :name => 'Teaching'
-  },
+  }
 )
