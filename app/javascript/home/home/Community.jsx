@@ -44,7 +44,7 @@ function Posts () {
                 <PostBody>
                   {truncate(body, url)}
                   <PostFooter>
-                    <a href={url}><div class="read-more-link">Read More</div></a>
+                    <a href={url}><div className="read-more-link">Read More</div></a>
                   </PostFooter>
                 </PostBody>
               </PostText>

@@ -32,6 +32,18 @@ function useBlogData (): [BlogData, ((BlogData) => void) => void] {
       })
     }, [])
 
+    React.useEffect(() => {
+      Orchard.harvest('blog_settings')
+        .then(blogSettings =>
+          update(draft => {
+            draft.blogSettings = blogSettings
+          })
+        )
+        .catch(e => {
+          throw e
+        })
+      }, [])
+
   return [data]
 }
 
@@ -41,7 +53,8 @@ export const BlogDataContext = React.createContext<
 
 function getDefaultBlogData () {
   return {
-    blogPosts: []
+    blogPosts: [],
+    blogSettings: []
   }
 }
 

@@ -12,51 +12,66 @@ import FeaturedCases from 'home/home/FeaturedCases';
 import Community from 'home/home/Community';
 import YoutubePlayer from 'react-youtube-player';
 import GetStarted from './GetStarted';
-import SocialFollow from "home/SocialFollow"
+import SocialFollow from "home/SocialFollow";
+import { BlogDataContext } from 'blog/blogData';
 
 
 
-const HomeContent = () => (
-  <Container>
-    <div class="flexdiv">
-      <h1>
-        <FormattedMessage id="catalog.openAccessLearningTools" />
-      </h1>
-      <SocialFollow />
-    </div>
-    <div class="flexdiv">
-      <GetStarted />
-      <div id="home-video-container">
-        <div id="home-video">
-        <YoutubePlayer
-            videoId='Y8JZkCcqOZo'
-            playbackState='unstarted'
-            configuration={
-                {
-                    showinfo: 0,
-                    controls: 0
-                }
-            }
-        />
+function HomeContent() {
+  const [{ blogSettings }] = React.useContext(
+    BlogDataContext
+  )
+  let video = blogSettings.find(setting => setting.name === "Home Video ID");
+  let videoId = "";
+  if (video) {
+    videoId = video.value;
+  }
+
+
+
+  return (
+    <Container>
+      <div className="flexdiv">
+        <h1>
+          <FormattedMessage id="catalog.openAccessLearningTools" />
+        </h1>
+        <SocialFollow />
+      </div>
+      <div className="flexdiv">
+        <GetStarted />
+        <div id="home-video-container">
+          <div id="home-video">
+          <YoutubePlayer
+              videoId={videoId}
+              playbackState='unstarted'
+              configuration={
+                  {
+                      showinfo: 0,
+                      controls: 0
+                  }
+              }
+          />
+          </div>
         </div>
       </div>
-    </div>
-    <div class="flexdiv">
-      <div id="home-community">
-        <div id="community-content" className="content-area">
-          <h4>Community</h4>
-          <Community />
+      <div className="flexdiv">
+        <div id="home-community">
+          <div id="community-content" className="content-area">
+            <h4>Community</h4>
+            <Community />
+          </div>
+        </div>
+        <div id="home-features">
+          <div id="featured-content" className="content-area">
+            <h4>Featured Cases</h4>
+            <FeaturedCases />
+          </div>
         </div>
       </div>
-      <div id="home-features">
-        <div id="featured-content" className="content-area">
-          <h4>Featured Cases</h4>
-          <FeaturedCases />
-        </div>
-      </div>
-    </div>
-  </Container>
-)
+    </Container>
+  )
+}
+
 export default HomeContent
 
 

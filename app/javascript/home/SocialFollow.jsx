@@ -13,18 +13,18 @@ export default function SocialFollow() {
     <SocialContainer>
       <a href="https://www.youtube.com/channel/UCY7p3OHqkI_yqIXOt_Kfgsw"
         className="youtube social">
-        <FontAwesomeIcon icon={faYoutube} size="1.5x" />
+        <FontAwesomeIcon icon={faYoutube} />
       </a>
       <a href="https://www.facebook.com/learngala/"
         className="facebook social">
-        <FontAwesomeIcon icon={faFacebook} size="1.5x" />
+        <FontAwesomeIcon icon={faFacebook} />
       </a>
       <a href="https://www.twitter.com/LearnMSC" className="twitter social">
-        <FontAwesomeIcon icon={faTwitter} size="1.5x" />
+        <FontAwesomeIcon icon={faTwitter} />
       </a>
        {/* <a href="https://www.instagram.com/learnbuildteach"
         className="instagram social">
-        <FontAwesomeIcon icon={faInstagram} size="2x" />
+        <FontAwesomeIcon icon={faInstagram} />
       </a> */}
     </SocialContainer>
   );
