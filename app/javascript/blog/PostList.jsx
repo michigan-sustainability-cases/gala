@@ -130,7 +130,6 @@ export const PostTitle = styled.div`
 `
 export const PostFooter = styled.div`
   padding-right: 10px;
-  font-weight: bold;
   text-align: right;
   @media all and (min-width: 600px) {
     order: 4;

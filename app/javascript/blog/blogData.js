@@ -13,11 +13,12 @@ import type {
 } from 'redux/state'
 
 export type BlogData = {
-  blogPosts: BlogPost[]
+  blogPosts: BlogPost[],
+  blogSettings: BlogSetting[]
 }
 
-function useBlogPostData (): [BlogPostData, ((BlogPostData) => void) => void] {
-  const [data, update] = useImmer(getDefaultBlogPostData())
+function useBlogData (): [BlogData, ((BlogData) => void) => void] {
+  const [data, update] = useImmer(getDefaultBlogData())
 
   React.useEffect(() => {
     Orchard.harvest('blog_posts')
@@ -36,9 +37,9 @@ function useBlogPostData (): [BlogPostData, ((BlogPostData) => void) => void] {
 
 export const BlogDataContext = React.createContext<
   [BlogData, ((BlogData) => void) => void]
->([getDefaultBlogPostData(), () => {}])
+>([getDefaultBlogData(), () => {}])
 
-function getDefaultBlogPostData () {
+function getDefaultBlogData () {
   return {
     blogPosts: []
   }
@@ -49,7 +50,7 @@ export function BlogDataContextProvider ({
 }: {
   children: React.Node,
 }) {
-  const [blogData, updateBlogData] = useBlogPostData()
+  const [blogData, updateBlogData] = useBlogData()
 
   return (
     <BlogDataContext.Provider value={[blogData, updateBlogData]}>

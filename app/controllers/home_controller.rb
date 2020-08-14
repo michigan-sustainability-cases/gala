@@ -7,6 +7,7 @@ class HomeController < ApplicationController
 
   # @route [GET] `/`
   def index
+    @blog_settings = BlogSetting.all
     @cases = policy_scope(Case)
              .ordered
   end

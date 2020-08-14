@@ -110,7 +110,6 @@ export const PostBody = styled.div`
 
 export const PostFooter = styled.div`
   padding-right: 10px;
-  font-weight: bold;
   text-align: right;
   line-height: 100%;
   @media all and (min-width: 600px) {

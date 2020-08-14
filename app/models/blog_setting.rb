@@ -9,6 +9,10 @@ class BlogSetting < ApplicationRecord
     BlogSetting.where(:name => 'Default Image').first
   end
 
+  def self.home_video_id
+    BlogSetting.where(:name => 'Home Videop ID').first.value
+  end
+
   def thumbnail(size = '130x')
     cropped_image(image, size)
   end
