@@ -159,18 +159,22 @@ const Container = styled.aside.attrs({ className: 'pt-dark' })`
   }
 
   #intro-msg {
-    @media (max-width: 1000px) {
-      font-size: 18px;
-      max-width: 600px;
-    }
-    @media (max-width: 1300px) {
-      max-width: 600px;
-    }
     @media (max-width: 1440px) {
       max-width: 700px;
     }
-    @media (max-width: 1330px) {
-      max-width: 650px;
+    @media (max-width: 1350px) {
+      max-width: 550px;
+    }
+    @media (max-width: 1200px) {
+      max-width: 400px;
+    }
+    @media (max-width: 930px) {
+      font-size: 18px;
+      max-width: 350px;
+    }
+    @media (max-width: 875px) {
+      font-size: 18px;
+      max-width: 150px;
     }
   }
 
