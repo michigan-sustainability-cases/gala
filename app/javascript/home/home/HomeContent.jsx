@@ -132,11 +132,25 @@ const Container = styled.aside.attrs({ className: 'pt-dark' })`
   }
 
   #home-community {
-    width: 55%;
+    width: 450px;
+
+    @media (min-width: 1300px) {
+      width: 600px;
+    }
+    @media (max-width: 1299px) {
+      margin-top: 40px;
+    }
   }
 
   #home-features {
-    width: 40%;
+    width: 420px;
+
+    @media (min-width: 1300px) {
+      width: 446px;
+    }
+    @media (max-width: 1299px) {
+      margin-top: 40px;
+    }
   }
 
   h1,
