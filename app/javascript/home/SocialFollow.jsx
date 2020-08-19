@@ -37,6 +37,11 @@ const SocialContainer = styled.div`
   font-size: 140%;
   margin-top: -20px;
 
+  @media (max-width: 1000px) {
+    margin-top: 0px;
+    padding: 0px
+  }
+
   a {
   //  background-color: white;
   }

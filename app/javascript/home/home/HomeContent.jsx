@@ -32,7 +32,7 @@ function HomeContent() {
   return (
     <Container>
       <div className="flexdiv">
-        <h1>
+        <h1 id="intro-msg">
           <FormattedMessage id="catalog.openAccessLearningTools" />
         </h1>
         <SocialFollow />
@@ -100,6 +100,10 @@ const Container = styled.aside.attrs({ className: 'pt-dark' })`
     justify-content: space-between;
     width: 100%;
     margin-bottom: 80px;
+
+    @media (max-width: 800px) {
+      margin-bottom: 40px;
+    }
   }
 
 
@@ -144,12 +148,29 @@ const Container = styled.aside.attrs({ className: 'pt-dark' })`
 
   #home-features {
     width: 420px;
+    margin0-left: 25px;
 
     @media (min-width: 1300px) {
       width: 446px;
     }
     @media (max-width: 1299px) {
       margin-top: 40px;
+    }
+  }
+
+  #intro-msg {
+    @media (max-width: 1000px) {
+      font-size: 18px;
+      max-width: 600px;
+    }
+    @media (max-width: 1300px) {
+      max-width: 600px;
+    }
+    @media (max-width: 1440px) {
+      max-width: 700px;
+    }
+    @media (max-width: 1330px) {
+      max-width: 650px;
     }
   }
 
