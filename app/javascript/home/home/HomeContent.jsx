@@ -96,6 +96,7 @@ const Container = styled.aside.attrs({ className: 'pt-dark' })`
 
   .flexdiv {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     width: 100%;
     margin-bottom: 80px;
@@ -104,7 +105,7 @@ const Container = styled.aside.attrs({ className: 'pt-dark' })`
 
   #getting-started {
     margin-top: 20px;
-    width: 55%;
+    max-width: 500px;
 
     #getting-started-blocks {
       width: 100%;
