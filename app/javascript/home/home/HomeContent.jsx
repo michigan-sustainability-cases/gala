@@ -101,7 +101,7 @@ const Container = styled.aside.attrs({ className: 'pt-dark' })`
     width: 100%;
     margin-bottom: 80px;
 
-    @media (max-width: 800px) {
+    @media (max-width: 1500px) {
       margin-bottom: 40px;
     }
   }
@@ -124,8 +124,8 @@ const Container = styled.aside.attrs({ className: 'pt-dark' })`
 
   #home-video-container {
 
-    @media (max-width: 1000px) {
-
+    @media (max-width: 1500px) {
+      margin-top: 40px;
     }
   }
 
@@ -147,14 +147,15 @@ const Container = styled.aside.attrs({ className: 'pt-dark' })`
   }
 
   #home-features {
-    width: 420px;
-    margin0-left: 25px;
+    width: 450px;
+    margin-left: 25px;
 
+    @media (max-width: 1500px) {
+      margin-top: 40px;
+      margin-left: 0px;
+    }
     @media (min-width: 1300px) {
       width: 446px;
-    }
-    @media (max-width: 1299px) {
-      margin-top: 40px;
     }
   }
 
