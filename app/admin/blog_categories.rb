@@ -14,9 +14,11 @@ ActiveAdmin.register BlogCategory do
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
   # end
-
-  menu parent: "Blog", priority: 2
-
+   
+   permit_params do
+    permitted = [:name, :created_at]
+   
+  end
 
   index do
     selectable_column
